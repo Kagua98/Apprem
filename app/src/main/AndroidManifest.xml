@@ -1,21 +1,130 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:dist="http://schemas.android.com/apk/distribution"
     package="com.application.apprem">
+
+    <dist:module dist:instant="true" />
+
+    <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED" />
+    <uses-permission android:name="android.permission.VIBRATE" />
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.WAKE_LOCK" />
+    <uses-permission android:name="android.permission.ACCESS_NOTIFICATION_POLICY" />
 
     <application
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
-        android:roundIcon="@mipmap/ic_launcher_round"
+        android:requestLegacyExternalStorage="true"
+        android:roundIcon="@mipmap/ic_launcher"
         android:supportsRtl="true"
-        android:theme="@style/AppTheme">
-        <activity android:name=".MainActivity">
+        android:theme="@style/AppTheme.Light">
+        <activity
+            android:name=".activities.MainActivity"
+            android:configChanges="orientation|screenSize|keyboardHidden"
+            android:label="@string/app_name"/>
+        <activity
+            android:name=".activities.HomeworkActivity"
+            android:label="@string/homework"
+            android:parentActivityName=".activities.MainActivity" />
+        <activity
+            android:name=".activities.NotesActivity"
+            android:label="@string/notes_activity_title"
+            android:parentActivityName=".activities.MainActivity" />
+        <activity
+            android:name=".activities.NoteEditorActivity"
+            android:label="@string/notes_activity_title"
+            android:parentActivityName=".activities.NotesActivity" />
+        <activity
+            android:name=".activities.TeachersActivity"
+            android:label="@string/teacher"
+            android:parentActivityName=".activities.MainActivity" />
+        <activity
+            android:name=".activities.ExamsActivity"
+            android:label="@string/exams_activity_title"
+            android:parentActivityName=".activities.MainActivity" />
+        <activity
+            android:name=".activities.SummaryActivity"
+            android:configChanges="orientation|screenSize|keyboardHidden"
+            android:label="@string/summary_activity_title"
+            android:parentActivityName=".activities.MainActivity" />
+        <activity
+            android:name=".activities.TimeSettingActivity"
+            android:label="@string/time_settings"
+            android:parentActivityName=".activities.SummaryActivity" />
+        <activity
+            android:name=".activities.ProfileActivity"
+            android:label="@string/profiles" />
+        <activity
+            android:name=".activities.SettingsActivity"
+            android:label="@string/settings"
+            android:parentActivityName=".activities.MainActivity">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value=".activities.MainActivity" />
+        </activity>
+
+        <activity android:name=".activities.Splash"
+            android:label="@string/app_name"
+            android:theme="@style/SplashTheme">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+
+        <receiver
+            android:name=".receivers.NotificationDismissButtonReceiver"
+            android:enabled="true" />
+        <receiver
+            android:name=".receivers.DailyReceiver"
+            android:enabled="true">
+            <intent-filter>
+                <category android:name="android.intent.category.DEFAULT" />
+
+                <action android:name="android.intent.action.BOOT_COMPLETED" />
+                <action android:name="android.intent.action.QUICKBOOT_POWERON" />
+            </intent-filter>
+        </receiver>
+        <receiver
+            android:name=".receivers.TurnOnReceiver"
+            android:enabled="true">
+            <intent-filter>
+                <category android:name="android.intent.category.DEFAULT" />
+
+                <action android:name="android.intent.action.BOOT_COMPLETED" />
+                <action android:name="android.intent.action.QUICKBOOT_POWERON" />
+            </intent-filter>
+        </receiver>
+        <receiver
+            android:name=".receivers.TurnOffReceiver"
+            android:enabled="true" />
+        <receiver
+            android:name=".receivers.SubjectReminderReceiver"
+            android:enabled="true" />
+
+        <activity
+            android:name=".appwidget.AppWidgetConfigureActivity"
+            android:label="@string/configure_widget_controls">
+            <intent-filter>
+                <action android:name="android.appwidget.action.APPWIDGET_CONFIGURE" />
+            </intent-filter>
+        </activity>
+
+        <receiver android:name=".appwidget.DayAppWidgetProvider">
+            <intent-filter>
+                <action android:name="android.appwidget.action.APPWIDGET_UPDATE" />
+                <action android:name="com.sunrain.timetablev4.ACTION_NEW_DAY" />
+            </intent-filter>
+            <meta-data
+                android:name="android.appwidget.provider"
+                android:resource="@xml/day_appwidget_info" />
+        </receiver>
+        <service
+            android:name=".appwidget.DayAppWidgetService"
+            android:permission="android.permission.BIND_REMOTEVIEWS" />
     </application>
 
 </manifest>

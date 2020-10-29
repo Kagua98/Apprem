@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.coordinatorlayout.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:fitsSystemWindows="true"
+    android:id="@+id/content_main_parent"
+    tools:context="com.application.apprem.activities.MainActivity">
+    <com.google.android.material.appbar.AppBarLayout
+        android:id="@+id/app_bar_layout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:elevation="0dp"
+        android:fitsSystemWindows="true"
+        android:elevation="0dp"
+        android:padding="0dp"
+        android:theme="@style/AppTheme.AppBarOverlay">
+
+        <com.google.android.material.appbar.MaterialToolbar
+            android:id="@+id/toolbar"
+            android:layout_width="match_parent"
+            android:layout_height="?attr/actionBarSize"
+            app:popupTheme="@style/AppTheme.PopupOverlay" />
+        <TextView
+            android:id="@+id/main_week_tV"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="?attr/colorPrimary"
+            android:gravity="center"
+            android:text="Even week"
+            android:textColor="?android:attr/textColorPrimary"
+            android:textSize="12sp" />
+
+        <Spinner
+            android:id="@+id/profile_spinner"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:enabled="false"
+            android:popupBackground="?android:attr/windowBackground"
+            android:visibility="gone"
+            app:popupTheme="?attr/popupMenuStyle" />
+
+        <com.google.android.material.tabs.TabLayout
+            android:id="@+id/tabLayout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="3dp"
+            android:backgroundTint="?colorPrimary"
+            android:clipToPadding="false"
+            android:padding="0dp"
+            android:theme="@style/AppTheme.AppBarOverlay"
+            app:layout_anchor="@+id/include"
+            app:layout_anchorGravity="top|center"
+            app:layout_constraintTop_toBottomOf="@id/app_bar_layout"
+            app:tabGravity="fill"
+            app:tabIndicatorColor="?colorAccent"
+            app:tabMode="scrollable"
+            app:tabSelectedTextColor="?android:attr/textColorPrimary"
+            app:tabTextColor="?android:attr/textColorSecondary"
+            android:fitsSystemWindows="true"
+            app:tabRippleColor="@color/colorPrimary"
+            android:background="@android:color/transparent"
+            app:tabBackground="@android:color/transparent"/>
+
+    </com.google.android.material.appbar.AppBarLayout>
+
+
+    <include
+        android:id="@+id/include"
+        layout="@layout/content_main" />
+
+</androidx.coordinatorlayout.widget.CoordinatorLayout>

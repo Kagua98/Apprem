@@ -19,3 +19,13 @@
 # If you keep the line number information, uncomment this to
 # hide the original source file name.
 #-renamesourcefileattribute SourceFile
+
+-keep class *.R
+-keep class **.R$* {
+    <fields>;
+}
+-keep public class org.apache.poi.hssf.* {*;}
+-keep public class org.apache.poi.ss.* {*;}
+-keep public class me.jfenn.colorpickerdialog.* {*;}
+-keep public class com.application.apprem.fragments.NotificationSettingsFragment
+-keep public class com.application.apprem.appwidget.* {*;}

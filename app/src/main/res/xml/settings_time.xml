@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <Preference
+        android:key="start_time"
+        android:title="@string/start_of_school"
+        app:iconSpaceReserved="false" />
+    <Preference
+        android:key="set_period_length"
+        android:title="@string/length_of_period"
+        app:iconSpaceReserved="false" />
+    <SwitchPreferenceCompat
+        android:defaultValue="false"
+        android:key="show_times"
+        android:summary="@string/show_times_instead_of_lessons_desc"
+        android:title="@string/show_times_instead_of_lessons"
+        app:iconSpaceReserved="false" />
+    <SwitchPreferenceCompat
+        android:defaultValue="true"
+        android:key="auto_fill"
+        android:summary="@string/intelligent_auto_fill_desc"
+        android:title="@string/intelligent_auto_fill"
+        app:iconSpaceReserved="false" />
+    <SwitchPreferenceCompat
+        android:defaultValue="false"
+        android:key="two_weeks"
+        android:title="@string/enable_even_odd_weeks"
+        app:iconSpaceReserved="false" />
+    <Preference
+        android:key="term_start"
+        android:summary="@string/start_of_term_desc"
+        android:title="@string/start_of_term"
+        app:iconSpaceReserved="false" />
+</PreferenceScreen>

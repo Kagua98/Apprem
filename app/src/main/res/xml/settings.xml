@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <Preference
+        android:icon="@drawable/ic_notifications"
+        android:key="notification_settings"
+        android:title="@string/notification_settings"
+        app:fragment="com.application.apprem.fragments.NotificationSettingsFragment" />
+
+    <Preference
+        android:icon="@drawable/ic_time_preference"
+        android:key="time_settings"
+        android:summary="@string/time_settings_desc"
+        android:title="@string/time_settings" />
+
+    <SwitchPreferenceCompat
+        android:defaultValue="true"
+        android:icon="@drawable/ic_no_notifications"
+        android:key="automatic_do_not_disturb"
+        android:summary="@string/do_not_disturb_settings_desc"
+        android:title="@string/do_not_disturb_setting" />
+
+    <SwitchPreferenceCompat
+        android:defaultValue="false"
+        android:key="do_not_disturb_turn_off"
+        android:summary="@string/do_not_disturb_turn_off_desc"
+        android:title="@string/do_not_disturb_turn_off" />
+
+    <ListPreference
+        android:defaultValue="switch"
+        android:entries="@array/theme_array"
+        android:entryValues="@array/theme_array_values"
+        android:icon="@drawable/ic_theme"
+        android:key="theme"
+        android:title="@string/choose_theme_setting" />
+
+    <SwitchPreferenceCompat
+        android:defaultValue="false"
+        android:icon="@drawable/ic_week"
+        android:key="sevendays"
+        android:summary="@string/enable_seven_days_setting"
+        android:title="@string/seven_days_of_the_week" />
+
+    <EditTextPreference
+        android:icon="@drawable/ic_school"
+        android:key="schoolwebsite"
+        android:selectAllOnFocus="true"
+        android:singleLine="true"
+        android:summary="@string/change_school_website_setting_summary"
+        android:title="@string/change_school_website_setting" />
+
+    <SwitchPreferenceCompat
+        android:defaultValue="true"
+        android:icon="@drawable/ic_presentation"
+        android:key="is_preselection"
+        android:title="@string/show_preselection_list" />
+
+    <Preference
+        android:key="preselection_elements"
+        android:title="@string/set_preselection_elements" />
+
+    <Preference
+        android:key="cyanea"
+        android:title="Theming"
+        app:isPreferenceVisible="false" />
+</PreferenceScreen>

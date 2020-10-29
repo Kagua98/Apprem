@@ -1,3 +1,278 @@
 <resources>
     <string name="app_name">Apprem</string>
+
+    <string name="navigation_drawer_open">Open navigation drawer</string>
+    <string name="navigation_drawer_close">Close navigation drawer</string>
+    <string name="settings">Settings</string>
+
+    <!-- Fragments strings -->
+    <string name="monday">Monday</string>
+    <string name="tuesday">Tuesday</string>
+    <string name="wednesday">Wednesday</string>
+    <string name="thursday">Thursday</string>
+    <string name="friday">Friday</string>
+    <string name="saturday">Saturday</string>
+    <string name="sunday">Sunday</string>
+    <string name="selected">Selected</string>
+
+    <!-- Main Activity strings -->
+    <string name="seven_days_of_the_week">7 days of the Week</string>
+    <string name="subject">Subject</string>
+    <string name="field_error">field cannot be empty!</string>
+    <string name="time_error">Time field cannot be empty!</string>
+    <string name="delete">Delete</string>
+    <string name="edit">Edit</string>
+    <string name="school_website">School website</string>
+    <string name="please_set_school_website_url">Please set the URL of your school website in settings.</string>
+
+    <string name="add_subject">Add subject</string>
+    <string name="edit_subject">Edit subject</string>
+    <string name="teacher">Teacher</string>
+    <string name="room">Room</string>
+    <string name="time">Time</string>
+    <string name="save">Save</string>
+    <string name="cancel">Cancel</string>
+    <string name="time_to_dialog">To:</string>
+    <string name="time_from_dialog">From:</string>
+    <string name="subject_dialog">Subject:</string>
+    <string name="teacher_dialog">Teacher:</string>
+    <string name="room_dialog">Room:</string>
+    <string name="select_time">Select time</string>
+    <string name="select_color">Select color</string>
+    <string name="choose_time">Choose time</string>
+    <string name="choose_date">Choose date</string>
+    <string name="choose_color">Choose color</string>
+    <string name="select">Select</string>
+
+    <!-- Homeworks Activity strings -->
+    <string name="homework">Homework</string>
+    <string name="deadline_dialog">Deadline:</string>
+    <string name="description_dialog">Description:</string>
+    <string name="date_error">Date field cannot be empty!</string>
+    <string name="edit_homework">Edit homework</string>
+    <string name="add_homework">Add homework</string>
+    <string name="date">Date</string>
+
+    <!-- Notes Activity strings -->
+    <string name="title_dialog">Title:</string>
+    <string name="add_note">Add note</string>
+    <string name="edit_note">Edit note</string>
+    <string name="title_error">Title field cannot be empty!</string>
+    <string name="title">Title</string>
+    <string name="saved">Saved</string>
+
+    <!-- Teachers Activity strings -->
+    <string name="teachers">Teachers</string>
+    <string name="add_teacher">Add teacher</string>
+    <string name="edit_teacher">Edit teacher</string>
+    <string name="name_dialog">Name:</string>
+    <string name="post_dialog">Post:</string>
+    <string name="phonenumber_dialog">Phone:</string>
+    <string name="email_dialog">Email:</string>
+    <string name="name">Name</string>
+    <string name="phone_number">Phone number</string>
+    <string name="post">Post</string>
+    <string name="email">Email</string>
+
+    <!-- Exams Activity strings -->
+    <string name="add_exam">Add exam</string>
+    <string name="date_dialog">Date:</string>
+    <string name="time_dialog">Time:</string>
+
+    <!-- Settings Activity strings -->
+    <string name="enable_seven_days_setting">Enable 7 days of the Week</string>
+    <string name="change_school_website_setting">Change school website</string>
+    <string name="change_school_website_setting_summary">Change the URL of your school website</string>
+
+    <string name="notification_visibility_setting">Show notification</string>
+    <string name="notification_show_permanent_setting">Show permanently</string>
+    <string name="notification_show_permanent_setting_desc">The notification can only be hidden manually</string>
+    <string name="notification_alarm_setting">On fixed time</string>
+    <string name="notification_alarm_setting_desc">Show the notification at a specific time</string>
+    <string name="notification_reminder_setting">Remind before subject starts</string>
+    <string name="notification_reminder_settings_desc">Send a loud notification %s minutes before the subject starts.</string>
+    <string name="notification_notification_end_setting">Remind at the end of the subject</string>
+    <string name="notification_notification_end_setting_desc">Send a silent notification at the end of the subject to inform you about your next subject.</string>
+    <string name="notification_settings">Notification</string>
+
+    <string name="notification_dismiss">Hide</string>
+
+    <string name="permission_request_message">
+        Apprem App requires the storage permission in order to backup your data. Please grant the permission.
+        </string>
+    <string name="permission_required">Authorization is required!</string>
+    <string name="permission_required_description">These authorization (s) are required to ensure comprehensive functionality</string>
+    <string name="permission_ok_button">Grant</string>
+    <string name="permission_cancel_button">Cancel</string>
+
+    <string name="no">Cancel</string>
+    <string name="are_you_sure">Are you sure?</string>
+    <string name="yes">Yes</string>
+    <string name="dont_show_again">Do not show again</string>
+    <string name="with_teacher">with</string>
+    <string name="share_msg_in_room">in room</string>
+    <string name="version">Version</string>
+    <string name="backup">Backup</string>
+
+    <string name="description">Description</string>
+
+    <string name="select_start_time">Start</string>
+    <string name="select_end_time">End</string>
+
+    <string name="homework_activity_title">Homework</string>
+    <string name="notes_activity_title">Notes</string>
+    <string name="exams_activity_title">Exams</string>
+    <string name="notification_summary_title">Today\'s lessons:</string>
+    <string name="notification_next_week_title">Next lesson</string>
+    <string name="nav_drawer_description">Timetable App</string>
+    <string name="time_from">from</string>
+
+    <string name="channel">Timetable</string>
+    <string name="channel_important">Timetable important</string>
+    <string name="channel_desc">A notification about your lessons</string>
+    <string name="do_not_disturb_permission_desc">In order to automatically switch to do not disturb mode, the app requires the appropriate authorization</string>
+    <string name="do_not_disturb_setting">Automatic Do not disturb</string>
+    <string name="do_not_disturb_settings_desc">Automatically switch to do not disturb mode during subjects.</string>
+    <string name="do_not_disturb_turn_off">Also turning off</string>
+    <string name="do_not_disturb_turn_off_desc">Turn do not disturb mode off at the end of the subjects.</string>
+    <string name="backup_successful">Backup has been saved to %s</string>
+    <string name="backup_failed">Backup failed</string>
+    <string name="import_successful">Restore succeeded</string>
+    <string name="import_failed">Restore failed</string>
+    <string name="restore">Restore</string>
+    <string name="no_backup_found_in_downloads">No Backup found in %s</string>
+    <string name="Documents">Documents</string>
+    <string name="Downloads">Downloads</string>
+    <string name="colorPickerDialog_preset">Presets</string>
+    <string name="delete_content">Should %s be deleted?</string>
+    <string name="delete_week">the subject %s</string>
+    <string name="delete_note">the note %s</string>
+    <string name="delete_exam">the exam %s</string>
+    <string name="delete_everything">Delete Everything?</string>
+    <string name="delete_everything_desc">You will not be able to recover any data!
+        \nCreate Backup instead?</string>
+    <string name="successfully_deleted_everything">Successfully deleted everything</string>
+    <string name="an_error_occurred">An error occurred</string>
+
+    <string name="no_email_app">No email app installed</string>
+    <string name="no_navigation_app">No navigation app installed</string>
+    <string name="no_calendar_app">No calendar app installed</string>
+    <string name="add_to_calendar">Should this event be added to your calendar?</string>
+
+    <string name="choose_theme_setting">Choose theme</string>
+    <string name="theme_light">Light</string>
+    <string name="theme_dark">Dark</string>
+    <string name="theme_black">Black</string>
+    <string name="theme_auto">Automatic</string>
+
+    <string name="about_libs_title">Open-Source Libraries</string>
+
+    <string name="summary_activity_title">Summary</string>
+    <string name="change_summary_library">Change presentation</string>
+    <string name="start_of_school">School start (set only on first app start)</string>
+    <string name="length_of_period">Duration of your subjects (set only on first app start)</string>
+    <string name="minutes">minutes</string>
+    <string name="lesson">lesson</string>
+    <string name="show_times_instead_of_lessons">Show exact times of subjects</string>
+    <string name="show_times_instead_of_lessons_desc">Show the exact times instead of the subject\'s number, e.g. 8:00 instead of 1</string>
+
+    <string-array name="timetable_header">
+        <item>Mon</item>
+        <item>Tue</item>
+        <item>Wed</item>
+        <item>Thu</item>
+        <item>Fri</item>
+        <item>Sat</item>
+        <item>Sun</item>
+    </string-array>
+
+    <string-array name="preselected_subjects">
+        <item>Art</item>
+        <item>Biology</item>
+        <item>Chemistry</item>
+        <item>English</item>
+        <item>French</item>
+        <item>Geography</item>
+        <item>German</item>
+        <item>History</item>
+        <item>Math</item>
+        <item>Music</item>
+        <item>Physics</item>
+        <item>Politics</item>
+        <item>Religion</item>
+        <item>Spanish</item>
+        <item>Sport</item>
+    </string-array>
+
+    <string name="pick_a_subject">Pick a subject</string>
+    <string name="new_subject">New subject</string>
+
+
+    <string name="app_widget_configure_intensity">Background color intensity（%d%%）</string>
+    <string name="app_widget_configure_time_style">Time style（%s）</string>
+    <string name="configure_widget_controls">Configure widget controls</string>
+    <string name="background_color">Background Color</string>
+    <string name="black">Black</string>
+    <string name="white">White</string>
+    <string name="background_color_intensity_15">Background color intensity（15%）</string>
+    <string name="time_style_first_session_of_the_morning">Time style (first session of the morning)</string>
+    <string name="style_1">Style 1</string>
+    <string name="style_2">Style 2</string>
+    <string name="style_3">Style 3</string>
+    <string name="no_class">No subjects</string>
+    <string name="confirm">Confirm</string>
+
+    <string name="time_settings">Time settings</string>
+    <string name="time_settings_desc">Settings about the start of your school and the length of your lessons.</string>
+    <string name="ok">OK</string>
+    <string name="first_start_setup">Some things have to be set at the beginning.</string>
+    <string name="start_of_term">Start of your term</string>
+    <string name="start_of_term_desc">With this date we calculate if today is an even or an odd week.
+        \nThe first week of your term is always an even week.
+        \nIf you want to switch the weeks manually, just change the week of your term start.</string>
+    <string name="enable_even_odd_weeks">Enable even/odd weeks</string>
+    <string name="even_week">Even week</string>
+    <string name="odd_week">Odd week</string>
+    <string name="intelligent_auto_fill">Automatically select start/end</string>
+    <string name="intelligent_auto_fill_desc">Automatically select the matching begin/end time to your inputs.</string>
+    <string name="show_preselection_list">Show preselection list</string>
+    <string name="set_preselection_elements">Set the elements of the list</string>
+    <string name="de_select_all">De-/Select all</string>
+
+    <!-- Profiles -->
+    <string name="profiles_add">Add Profile\u2026</string>
+    <string name="profiles_delete_submit_heading">Are you sure?</string>
+    <string name="profiles_edit">Edit\u2026</string>
+    <string name="profiles_delete_message">Are you sure that you want to delete User %s</string>
+    <string name="profiles">Profiles</string>
+    <string name="add_profile_button">Add profile</string>
+    <string name="add">Add</string>
+    <string name="profile_default_name">Default</string>
+    <string name="profile_empty_name">NewProfile</string>
+    <string name="title_activity_main">MainActivity</string>
+    <string name="nav_header_title">Android Studio</string>
+    <string name="nav_header_subtitle">android.studio@android.com</string>
+    <string name="nav_header_desc">Navigation header</string>
+    <string name="action_settings">Settings</string>
+
+    <string name="menu_home">Home</string>
+    <string name="menu_gallery">Gallery</string>
+    <string name="menu_slideshow">Slideshow</string>
+    <string name="title_activity_settings">SettingsActivity</string>
+
+    <!-- Preference Titles -->
+    <string name="messages_header">Messages</string>
+    <string name="sync_header">Sync</string>
+
+    <!-- Messages Preferences -->
+    <string name="signature_title">Your signature</string>
+    <string name="reply_title">Default reply action</string>
+
+    <!-- Sync Preferences -->
+    <string name="sync_title">Sync email periodically</string>
+    <string name="attachment_title">Download incoming attachments</string>
+    <string name="attachment_summary_on">Automatically download attachments for incoming emails
+    </string>
+    <string name="attachment_summary_off">Only download attachments when manually requested</string>
+    <string name="popup_menu">Popup menu</string>
 </resources>

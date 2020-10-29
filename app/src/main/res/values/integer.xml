@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <!-- Notification -->
+    <integer name="notification_bitmap_size">256</integer>
+    <integer name="notification_max_text_size">230</integer>
+    <integer name="notification_min_text_size">80</integer>
+    <integer name="notification_text_size_factor">30</integer>
+
+</resources>
