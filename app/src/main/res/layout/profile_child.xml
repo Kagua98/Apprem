@@ -1,16 +1,25 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<com.google.android.material.card.MaterialCardView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:orientation="horizontal">
+    app:cardCornerRadius="5dp"
+    app:strokeColor="@color/colorAccent"
+    app:strokeWidth="0.5dp"
+    app:cardUseCompatPadding="true">
 
-
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="10dp"
+        android:orientation="horizontal">
     <ImageButton
         android:id="@+id/profilelist_delete"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
+        android:contentDescription="@string/delete"
+        android:tint="@android:color/holo_red_dark"
         app:srcCompat="@drawable/ic_delete" />
 
     <TextView
@@ -28,6 +37,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
+        android:contentDescription="@string/is_favorite"
         app:srcCompat="@drawable/ic_star_outlined" />
 
     <ImageButton
@@ -35,6 +45,8 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
+        android:contentDescription="@string/edit"
         app:srcCompat="@drawable/ic_edit" />
 
-</LinearLayout>
+    </LinearLayout>
+</com.google.android.material.card.MaterialCardView>

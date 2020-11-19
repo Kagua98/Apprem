@@ -1,0 +1,104 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:background="?android:selectableItemBackground">
+
+    <com.google.android.material.card.MaterialCardView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        app:cardElevation="5dp"
+        app:cardCornerRadius="5dp"
+        app:cardUseCompatPadding="true"
+        android:layout_marginTop="@dimen/grid_item_book_card_info_margin_top">
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:padding="10dp"
+            android:orientation="vertical">
+            <TextView
+                tools:text="Grief is the Thing with Feathers"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/grid_item_title_text_id"
+                android:textAppearance="@style/TextAppearance.MaterialComponents.Headline5"/>
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:orientation="horizontal">
+                <RatingBar
+                    android:id="@+id/grid_item_ratingbar_id"
+                    android:layout_width="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_height="wrap_content"
+                    style="?android:attr/ratingBarStyleSmall"
+                    android:rating="4.0" />
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:orientation="horizontal">
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="("/>
+                    <TextView
+                        android:id="@+id/grid_item_rating_count_text_id"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:text="20"
+                        app:drawableEndCompat="@drawable/ic_account"/>
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text=")"/>
+
+                </LinearLayout>
+
+            </LinearLayout>
+            <TextView
+                android:id="@+id/grid_item_author_text_id"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Name of Author"
+                android:layout_gravity="center"/>
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:orientation="horizontal">
+                <TextView
+                    android:id="@+id/grid_item_list_price_text_id"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    tools:text="KES 200"
+                    android:layout_weight="1" />
+                <TextView
+                    android:layout_weight="1"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/grid_item_retail_price_text_id"
+                    tools:text="KES 250" />
+            </LinearLayout>
+
+        </LinearLayout>
+
+
+    </com.google.android.material.card.MaterialCardView>
+
+    <ImageView
+        android:id="@+id/grid_item_image_id"
+        android:layout_width="150dp"
+        android:layout_height="200dp"
+        android:layout_marginTop="@dimen/grid_item_image_margin_top"
+        android:adjustViewBounds="true"
+        android:scaleType="fitXY"
+        android:layout_gravity="center" />
+
+</LinearLayout>

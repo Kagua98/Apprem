@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+    <com.google.android.material.card.MaterialCardView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:cardCornerRadius="5dp"
+        android:visibility="visible"
+        app:cardElevation="5dp">
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:orientation="vertical"
+            android:layout_margin="20dp">
+
+            <NumberPicker
+                android:id="@+id/pref_number_picker_id"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:solidColor="@color/colorPrimary"
+                android:minWidth="@dimen/number_picker_min_width"/>
+
+        </LinearLayout>
+    </com.google.android.material.card.MaterialCardView>
+
+
+
+
+
+
+</RelativeLayout>

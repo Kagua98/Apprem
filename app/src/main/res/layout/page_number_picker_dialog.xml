@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+    <com.google.android.material.card.MaterialCardView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:cardCornerRadius="5dp"
+        app:cardElevation="5dp">
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+            <com.google.android.material.appbar.MaterialToolbar
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:title="@string/page_number_picker_title_text"/>
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="0.3dp"
+                android:background="@color/colorPrimary"/>
+            <NumberPicker
+                android:id="@+id/page_number_picker_id"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:solidColor="@color/colorPrimary"
+                android:layout_marginTop="10dp"
+                android:layout_gravity="center"
+                android:minWidth="@dimen/number_picker_min_width"/>
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="end"
+                android:layout_marginTop="10dp"
+                android:orientation="horizontal">
+                <Button
+                    android:id="@+id/page_number_picker_cancel_btn_id"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:layout_margin="5dp"
+                    android:text="@string/page_number_picker_cancel_button_text"/>
+                <Button
+                    android:id="@+id/page_number_picker_set_btn_id"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:layout_margin="5dp"
+                    android:text="@string/page_number_picker_set_button_text"/>
+            </LinearLayout>
+        </LinearLayout>
+    </com.google.android.material.card.MaterialCardView>
+
+
+
+
+
+
+</FrameLayout>

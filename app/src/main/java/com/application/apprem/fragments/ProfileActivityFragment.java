@@ -40,6 +40,7 @@ public class ProfileActivityFragment extends Fragment {
 
         adapter = new ProfileListAdapter(requireContext(), 0);
         ((ListView) root.findViewById(R.id.profile_list)).setAdapter(adapter);
+        ((ListView) root.findViewById(R.id.profile_list)).setDividerHeight(0);
 
         requireActivity().findViewById(R.id.fab).setOnClickListener((View v) -> openAddDialog());
         return root;

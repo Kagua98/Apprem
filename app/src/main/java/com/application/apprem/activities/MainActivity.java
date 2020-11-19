@@ -350,6 +350,9 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         } else if (itemId == R.id.summary) {
             Intent teacher = new Intent(MainActivity.this, SummaryActivity.class);
             startActivity(teacher);
+        }else if (itemId == R.id.library){
+            Intent intent = new Intent(MainActivity.this, BookSearchActivity.class);
+            startActivity(intent);
         }
         DrawerLayout drawer = findViewById(R.id.drawer_layout);
         drawer.closeDrawer(GravityCompat.START);

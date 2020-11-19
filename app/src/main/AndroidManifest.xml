@@ -11,6 +11,10 @@
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.WAKE_LOCK" />
     <uses-permission android:name="android.permission.ACCESS_NOTIFICATION_POLICY" />
+    <!-- Permission for access to Internet -->
+    <uses-permission android:name="android.permission.INTERNET" />
+    <!-- Permission to check the Network State -->
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
 
     <application
         android:allowBackup="true"
@@ -64,6 +68,44 @@
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value=".activities.MainActivity" />
         </activity>
+
+
+
+
+        <activity
+            android:name=".activities.BookSearchActivity"
+            android:label="@string/search_title_str"
+            android:launchMode="singleTop"
+            android:parentActivityName=".activities.MainActivity">
+            <intent-filter>
+                <action android:name="android.intent.action.SEARCH" />
+            </intent-filter>
+            <meta-data
+                android:name="android.app.searchable"
+                android:resource="@xml/searchable" />
+        </activity>
+
+        <activity
+            android:name=".activities.BookDetailActivity"
+            android:label="@string/book_detail_title_str"
+            android:launchMode="singleTop"
+            android:parentActivityName=".activities.BookSearchActivity">
+        </activity>
+
+        <!-- Activity that displays a full picture of the Book from the activity
+        opened for viewing Book details -->
+        <activity
+            android:name=".activities.BookImageActivity"
+            android:label="@string/book_image_title_str"
+            android:parentActivityName=".activities.BookDetailActivity">
+        </activity>
+
+        <!-- Provider for the Recent Search Suggestions -->
+        <provider
+            android:name=".providers.RecentBookSearchProvider"
+            android:authorities="com.application.apprem.providers.RecentBookSearchProvider"
+            android:exported="false" />
+
 
         <activity android:name=".activities.Splash"
             android:label="@string/app_name"

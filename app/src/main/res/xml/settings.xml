@@ -9,6 +9,12 @@
         app:fragment="com.application.apprem.fragments.NotificationSettingsFragment" />
 
     <Preference
+        android:icon="@drawable/ic_library"
+        android:key="library_settings"
+        android:title="@string/library"
+        app:fragment="com.application.apprem.settings.SearchSettingsFragment"/>
+
+    <Preference
         android:icon="@drawable/ic_time_preference"
         android:key="time_settings"
         android:summary="@string/time_settings_desc"

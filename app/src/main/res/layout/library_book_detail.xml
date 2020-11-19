@@ -1,0 +1,271 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.core.widget.NestedScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/scrollView"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_weight="1"
+    tools:context=".activities.BookDetailActivity">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:padding="16dp">
+
+        <ImageView
+            android:id="@+id/detail_book_image_id"
+            android:layout_width="150dp"
+            android:layout_height="200dp"
+            android:scaleType="fitXY"
+            android:layout_gravity="center"/>
+
+        <com.google.android.material.card.MaterialCardView
+            android:id="@+id/detail_title_author_card_id"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            app:cardElevation="5dp"
+            android:layout_marginTop="10dp"
+            app:cardCornerRadius="5dp"
+            app:cardUseCompatPadding="true">
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:padding="10dp"
+                android:orientation="vertical">
+                <TextView
+                    android:id="@+id/detail_title_text_id"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textAppearance="@style/TextAppearance.MaterialComponents.Headline5"
+                    tools:text="Grief is the Thing with Feathers" />
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:orientation="horizontal">
+                    <RatingBar
+                        android:id="@+id/detail_ratingbar_id"
+                        android:layout_width="wrap_content"
+                        android:layout_gravity="center"
+                        android:layout_height="wrap_content"
+                        style="?android:attr/ratingBarStyleSmall"
+                        android:rating="4.0" />
+                    <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:orientation="horizontal">
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="("/>
+                        <TextView
+                            android:id="@+id/detail_rating_count_text_id"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center"
+                            android:text="20"
+                            app:drawableEndCompat="@drawable/ic_account"/>
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text=")"/>
+
+                    </LinearLayout>
+
+                </LinearLayout>
+                <TextView
+                    android:id="@+id/detail_author_text_id"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Name of Author"
+                    android:layout_gravity="center"/>
+
+            </LinearLayout>
+
+
+        </com.google.android.material.card.MaterialCardView>
+
+        <com.google.android.material.card.MaterialCardView
+            android:id="@+id/detail_book_info_card_id"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            app:cardElevation="5dp"
+            app:cardCornerRadius="5dp"
+            android:layout_marginEnd="10dp"
+            android:layout_marginStart="10dp"
+            android:layout_marginTop="20dp">
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center|top"
+                android:orientation="vertical">
+
+                <TextView
+                    android:id="@+id/detail_pages_text_id"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:textColor="@color/colorPrimary"
+                    android:text="Number of Pages"
+                    android:layout_margin="5dp"/>
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:orientation="horizontal">
+                    <TextView
+                        android:id="@+id/detail_publisher_section_text_id"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Published By:"
+                        android:layout_marginEnd="5dp"/>
+                    <TextView
+                        android:id="@+id/detail_publisher_text_id"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Publisher Company"/>
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:orientation="horizontal">
+                    <TextView
+                        android:id="@+id/detail_category_section_text_id"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Categories:"
+                        android:layout_marginEnd="5dp"/>
+                    <TextView
+                        android:id="@+id/detail_categories_text_id"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Category"/>
+                </LinearLayout>
+
+                <TextView
+                    android:id="@+id/detail_description_text_id"
+                    android:layout_marginTop="10dp"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:padding="10dp"
+                    android:text="Description"/>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/detail_samples_section_text_id"
+                    android:padding="10dp"
+                    android:textStyle="italic"
+                    android:visibility="gone"
+                    android:text="Sample Reviews"/>
+
+            </LinearLayout>
+
+        </com.google.android.material.card.MaterialCardView>
+
+        <com.google.android.material.card.MaterialCardView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="10dp"
+            android:layout_marginTop="20dp"
+            android:layout_marginEnd="10dp"
+            android:layout_marginBottom="30dp"
+            android:visibility="visible"
+            app:cardCornerRadius="5dp"
+            app:cardElevation="5dp">
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:padding="10dp"
+                android:orientation="vertical">
+                <TextView
+                    android:id="@+id/detail_not_for_sale_text_id"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textAppearance="@style/TextAppearance.MaterialComponents.Headline6"
+                    android:textColor="@android:color/holo_red_dark"
+                    android:text="NOT FOR SALE"/>
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+                    <Button
+                        android:id="@+id/detail_epub_button_id"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="E-Pub"
+                        android:lines="1"
+                        android:backgroundTint="@android:color/holo_orange_light"
+                        android:drawableEnd="@drawable/ic_epub"
+                        android:layout_weight="1"
+                        android:layout_margin="5dp"/>
+
+                    <Button
+                        android:id="@+id/detail_pdf_button_id"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="PDF"
+                        android:lines="1"
+                        android:drawableEnd="@drawable/ic_pdf"
+                        android:layout_weight="1"
+                        android:backgroundTint="@android:color/holo_blue_dark"
+                        android:layout_margin="5dp"/>
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+                    <Button
+                        android:id="@+id/detail_web_button_id"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="5dp"
+                        android:layout_weight="1"
+                        android:backgroundTint="@android:color/holo_purple"
+                        android:drawableEnd="@drawable/ic_web"
+                        android:text="WEB" />
+                    <Button
+                        android:id="@+id/detail_info_button_id"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:layout_margin="5dp"
+                        android:drawableEnd="@drawable/ic_info"
+                        android:text="Info" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+                    <Button
+                        android:id="@+id/detail_buy_button_id"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:backgroundTint="@android:color/holo_green_dark"
+                        android:drawableEnd="@drawable/ic_buy"
+                        android:layout_margin="5dp"
+                        android:text="BUY" />
+                </LinearLayout>
+
+            </LinearLayout>
+        </com.google.android.material.card.MaterialCardView>
+
+    </LinearLayout>
+
+
+</androidx.core.widget.NestedScrollView>
+
+
+
+

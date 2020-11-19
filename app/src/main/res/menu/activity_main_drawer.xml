@@ -6,7 +6,7 @@
         android:checkableBehavior="none">
         <item
             android:id="@+id/schoolwebsitemenu"
-            android:icon="@drawable/ic_web"
+            android:icon="@drawable/ic_webview"
             android:title="@string/school_website" />
     </group>
 
@@ -34,6 +34,10 @@
             android:id="@+id/notes"
             android:icon="@drawable/ic_notes"
             android:title="@string/notes_activity_title" />
+        <item
+            android:id="@+id/library"
+            android:icon="@drawable/ic_library"
+            android:title="@string/library"/>
     </group>
 
     <group

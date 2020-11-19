@@ -1,0 +1,123 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:fitsSystemWindows="true"
+    tools:context=".activities.BookSearchActivity">
+
+
+    <com.google.android.material.tabs.TabLayout
+        android:id="@+id/sliding_tabs_id"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:tabIndicatorColor="?colorAccent"
+        app:tabMode="fixed"
+        app:tabSelectedTextColor="?android:attr/textColorPrimary"
+        app:tabTextColor="?android:attr/textColorSecondary"
+        app:tabRippleColor="@color/colorPrimary"
+        app:tabBackground="@android:color/transparent"/>
+
+    <!-- Progress Bar of type indeterminate to display the progress while loading data -->
+    <ProgressBar
+        android:layout_below="@id/sliding_tabs_id"
+        android:id="@+id/progress_bar_id"
+        android:layout_width="match_parent"
+        android:layout_height="15dp"
+        android:visibility="gone"
+        style="@style/Widget.AppCompat.ProgressBar.Horizontal"
+        android:minHeight="@dimen/progress_bar_height"
+        android:maxHeight="@dimen/progress_bar_height"
+        android:indeterminate="true"
+        android:indeterminateOnly="true"
+        app:layout_anchor="@id/app_bar_layout"
+        app:layout_anchorGravity="bottom"/>
+
+    <!-- ViewPager to display the data loaded by its fragments -->
+    <androidx.viewpager.widget.ViewPager
+        android:id="@+id/view_pager_id"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@id/progress_bar_id"/>
+
+    <LinearLayout
+        android:id="@+id/pagination_panel_id"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="20dp"
+        android:visibility="gone"
+        android:layout_alignParentBottom="true">
+        <ImageButton
+            android:id="@+id/page_first_button_id"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:background="@android:color/transparent"
+            android:src="@drawable/ic_page_first_button"/>
+        <ImageButton
+            android:id="@+id/page_previous_button_id"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:background="@android:color/transparent"
+            android:src="@drawable/ic_page_previous_button"/>
+        <ImageButton
+            android:id="@+id/page_more_button_id"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:background="@android:color/transparent"
+            android:src="@drawable/ic_page_more_button"/>
+        <ImageButton
+            android:id="@+id/page_next_button_id"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:background="@android:color/transparent"
+            android:src="@drawable/ic_page_next_button"/>
+        <ImageButton
+            android:id="@+id/page_last_button_id"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:background="@android:color/transparent"
+            android:src="@drawable/ic_page_last_button"/>
+
+    </LinearLayout>
+
+    <!-- Displayed every time when the app is launched -->
+    <ScrollView
+        android:id="@+id/welcome_page_id"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:fillViewport="true"
+        android:padding="20dp"
+        android:visibility="gone">
+
+        <include
+            layout="@layout/welcome_page"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+
+    </ScrollView>
+
+    <!-- Displayed when there is no result for the search executed -->
+    <ScrollView
+        android:id="@+id/no_result_page_id"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:fillViewport="true"
+        android:padding="20dp"
+        android:visibility="gone">
+
+        <include
+            layout="@layout/no_result_page"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+
+    </ScrollView>
+
+
+
+</RelativeLayout>
