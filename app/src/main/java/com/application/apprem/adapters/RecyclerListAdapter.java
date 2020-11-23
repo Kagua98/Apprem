@@ -33,14 +33,7 @@ import androidx.loader.content.Loader;
 import androidx.recyclerview.widget.DiffUtil;
 import androidx.recyclerview.widget.RecyclerView;
 
-/**
- * Adapter Class of the RecyclerView whose layout 'R.layout.books_list_item_original' is inflated by
- * {@link com.example.kaushiknsanji.bookslibrary.adapterviews.RecyclerViewFragment}
- * that is used along with the {@link android.support.v7.widget.LinearLayoutManager}
- * to bind and display a list of {@link BookInfo} objects
- *
- * @author Kaushik N Sanji
- */
+
 public class RecyclerListAdapter extends RecyclerView.Adapter<RecyclerListAdapter.ViewHolder>
         implements LoaderManager.LoaderCallbacks<DiffUtil.DiffResult> {
 
@@ -81,8 +74,6 @@ public class RecyclerListAdapter extends RecyclerView.Adapter<RecyclerListAdapte
         mLayoutRes = resource;
         mBookInfoList = bookInfos;
 
-        //Saving an instance of the font face for the Book Title
-        mTitleTextTypeface = Typeface.createFromAsset(getContext().getAssets(), "fonts/garamond_bold.ttf");
     }
 
     /**
@@ -104,13 +95,6 @@ public class RecyclerListAdapter extends RecyclerView.Adapter<RecyclerListAdapte
         mItemClickListener = listener;
     }
 
-    /**
-     * Method that registers the {@link OnAdapterItemDataSwapListener} for the
-     * {@link com.application.googlebooks.BookSearchActivity}
-     * to receive event callbacks
-     *
-     * @param listener is the instance of the Activity implementing the {@link OnAdapterItemDataSwapListener}
-     */
     public void setOnAdapterItemDataSwapListener(OnAdapterItemDataSwapListener listener) {
         mItemDataSwapListener = listener;
     }

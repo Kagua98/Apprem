@@ -6,8 +6,6 @@ import android.net.NetworkInfo;
 
 /**
  * Utility class that deals with the Network related stuff
- *
- * @author Kaushik N Sanji
  */
 public class NetworkUtility {
 

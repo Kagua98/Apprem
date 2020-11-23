@@ -8,21 +8,18 @@ import android.preference.PreferenceManager;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.Button;
+import android.widget.FrameLayout;
 import android.widget.NumberPicker;
 import android.widget.Toast;
 
 import com.application.apprem.R;
+import com.google.android.material.snackbar.Snackbar;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.DialogFragment;
 
-/**
- * {@link DialogFragment} class to display the Number Picker ('R.layout.page_number_picker_dialog_original')
- * for the user to select and jump to the page selected
- *
- * @author Kaushik N Sanji
- */
+
 public class PaginationNumberPickerDialogFragment extends DialogFragment
         implements View.OnClickListener, NumberPicker.OnValueChangeListener {
 
@@ -157,6 +154,11 @@ public class PaginationNumberPickerDialogFragment extends DialogFragment
 
                 //Displaying a Toast Message
                 Toast.makeText(getContext(), getString(R.string.navigate_page_sel_msg, mSelectedValue), Toast.LENGTH_SHORT).show();
+
+
+                //Snackbar.make(view, getString(R.string.navigate_page_sel_msg, mSelectedValue), Snackbar.LENGTH_LONG)
+                //        .setAction("Okay", null)
+                //        .show();
 
                 break;
             case R.id.page_number_picker_cancel_btn_id:

@@ -6,12 +6,14 @@
         android:icon="@drawable/ic_notifications"
         android:key="notification_settings"
         android:title="@string/notification_settings"
-        app:fragment="com.application.apprem.fragments.NotificationSettingsFragment" />
+        android:summary="Notification Settings including Reminders during start of lesson"
+        app:fragment="com.application.apprem.settings.NotificationSettingsFragment" />
 
     <Preference
         android:icon="@drawable/ic_library"
         android:key="library_settings"
         android:title="@string/library"
+        android:summary="Search Settings, Content Type, Sort Order"
         app:fragment="com.application.apprem.settings.SearchSettingsFragment"/>
 
     <Preference
@@ -66,8 +68,4 @@
         android:key="preselection_elements"
         android:title="@string/set_preselection_elements" />
 
-    <Preference
-        android:key="cyanea"
-        android:title="Theming"
-        app:isPreferenceVisible="false" />
 </PreferenceScreen>

@@ -12,8 +12,6 @@ import java.net.URL;
 /**
  * Utility class that calculates the extent of pagination possible
  * for the response received during the current search/pagination.
- *
- * @author Kaushik N Sanji
  */
 public class BookClientPaginationUtility {
 

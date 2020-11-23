@@ -235,12 +235,12 @@ public class SummaryActivity extends AppCompatActivity {
 
         ((LinearLayout) findViewById(R.id.summary_linear)).addView(timetable);
 
-/*        timetable.setOnStickerSelectEventListener((idx, schedules1) -> {
+        timetable.setOnStickerSelectEventListener((idx, schedules1) -> {
             CustomSchedule schedule = (CustomSchedule) schedules1.get(idx);
             Week week = schedule.getWeek();
             final View alertLayout = this.getLayoutInflater().inflate(R.layout.dialog_add_subject, null);
             AlertDialogsHelper.getEditSubjectDialog(this, alertLayout, () -> setupTimetableLibrary2(), week);
-        });*/
+        });
 
     }
 

@@ -1,7 +1,5 @@
 package com.application.apprem.utils;
 
-
-
 import com.application.apprem.models.BookInfo;
 
 import java.util.List;
@@ -9,12 +7,10 @@ import java.util.List;
 import androidx.recyclerview.widget.DiffUtil;
 
 /**
- * Class that extends {@link android.support.v7.util.DiffUtil.Callback}
+ * Class that extends Callback
  * to analyse the difference between two sets of
- * {@link com.application.googlebooks.models.BookInfo} objects
+ * {@link com.application.apprem.models.BookInfo} objects
  * used for updating the RecyclerView's Adapter data
- *
- * @author Kaushik N Sanji
  */
 public class BooksDiffUtility extends DiffUtil.Callback {
 

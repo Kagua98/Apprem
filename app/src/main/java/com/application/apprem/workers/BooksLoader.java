@@ -26,8 +26,6 @@ import androidx.loader.content.AsyncTaskLoader;
 /**
  * {@link AsyncTaskLoader} class for extracting the Book Volumes
  * on the Search executed by the User, in a worker thread
- *
- * @author Kaushik N Sanji
  */
 public class BooksLoader extends AsyncTaskLoader<List<BookInfo>> {
 

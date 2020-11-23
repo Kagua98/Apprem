@@ -5,7 +5,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.os.Bundle;
 
 import com.application.apprem.R;
-import com.application.apprem.fragments.TimeSettingsFragment;
+import com.application.apprem.settings.TimeSettingsFragment;
 import com.application.apprem.utils.PreferenceUtil;
 
 public class TimeSettingActivity extends AppCompatActivity {

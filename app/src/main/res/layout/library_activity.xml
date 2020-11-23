@@ -5,6 +5,7 @@
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:fitsSystemWindows="true"
+    android:id="@+id/parentView"
     tools:context=".activities.BookSearchActivity">
 
 
@@ -24,15 +25,14 @@
         android:layout_below="@id/sliding_tabs_id"
         android:id="@+id/progress_bar_id"
         android:layout_width="match_parent"
-        android:layout_height="15dp"
+        android:layout_height="wrap_content"
         android:visibility="gone"
+        android:elevation="5dp"
         style="@style/Widget.AppCompat.ProgressBar.Horizontal"
         android:minHeight="@dimen/progress_bar_height"
         android:maxHeight="@dimen/progress_bar_height"
         android:indeterminate="true"
-        android:indeterminateOnly="true"
-        app:layout_anchor="@id/app_bar_layout"
-        app:layout_anchorGravity="bottom"/>
+        android:indeterminateOnly="true" />
 
     <!-- ViewPager to display the data loaded by its fragments -->
     <androidx.viewpager.widget.ViewPager
@@ -96,7 +96,7 @@
         android:visibility="gone">
 
         <include
-            layout="@layout/welcome_page"
+            layout="@layout/library_welcome_page"
             android:layout_width="match_parent"
             android:layout_height="wrap_content" />
 

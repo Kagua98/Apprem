@@ -4,6 +4,9 @@
     <color name="colorPrimaryDark">#3700B3</color>
     <color name="colorAccent">#ee6002</color>
 
+
+    <color name="colorAccent2">#f5ece4</color>
+
     <color name="window_background">?android:attr/windowBackground</color>
 
     <color name="black">#D9000000</color>

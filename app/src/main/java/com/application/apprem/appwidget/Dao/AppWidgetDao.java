@@ -53,7 +53,7 @@ public class AppWidgetDao extends BaseDao {
 
         Map<String, Integer> configMap = null;
 
-        if (cursor.moveToNext()) {// id只存在一个，所以不用while
+        if (cursor.moveToNext()) {
             configMap = new HashMap<>();
             configMap.put("backgroundColor", cursor.getInt(cursor.getColumnIndex("backgroundColor")));
             configMap.put("timeStyle", cursor.getInt(cursor.getColumnIndex("timeStyle")));
@@ -81,7 +81,7 @@ public class AppWidgetDao extends BaseDao {
         int backgroundColorIndex = cursor.getColumnIndex("backgroundColor");
         int backgroundColor;
 
-        if (cursor.moveToNext()) {// id只存在一个，所以不用while
+        if (cursor.moveToNext()) {
             backgroundColor = cursor.getInt(backgroundColorIndex);
         } else {
             backgroundColor = defaultColor;
@@ -131,7 +131,7 @@ public class AppWidgetDao extends BaseDao {
         int number = update(db, TABLE_NAME, values, whereClause, whereArgs);
 
         if (number == 0) {
-            // 使用insertOrReplace会重置其他列的数据
+            //Using insert Or Replace will reset the data of other columns
             values.put("appWidgetId", appWidgetId);
             insert(db, TABLE_NAME, values);
         }
@@ -155,7 +155,7 @@ public class AppWidgetDao extends BaseDao {
         int currentTimeIndex = cursor.getColumnIndex("currentTime");
         long currentTime = 0;
 
-        if (cursor.moveToNext()) {// id只存在一个，所以不用while
+        if (cursor.moveToNext()) {
             currentTime = cursor.getLong(currentTimeIndex);
         }
 
@@ -167,26 +167,7 @@ public class AppWidgetDao extends BaseDao {
 
         return currentTime;
     }
-//
-//    public static void saveAppWidgetProfile(int appWidgetId, int profilePosition, Context context) {
-//        SQLiteDatabase db = DBManager.getDb(context);
-//
-//        ContentValues values = new ContentValues(2);
-//        values.put("profilePosition", profilePosition);
-//
-//        String whereClause = "appWidgetId = ?";
-//        String[] whereArgs = {String.valueOf(appWidgetId)};
-//
-//        int number = update(db, TABLE_NAME, values, whereClause, whereArgs);
-//
-//        if (number == 0) {
-//            // 使用insertOrReplace会重置其他列的数据
-//            values.put("appWidgetId", appWidgetId);
-//            insert(db, TABLE_NAME, values);
-//        }
-//
-//        DBManager.close(db);
-//    }
+
 
     public static int getAppWidgetProfile(int appWidgetId, int defaultProfile, Context context) {
         SQLiteDatabase db = DBManager.getDb(context);

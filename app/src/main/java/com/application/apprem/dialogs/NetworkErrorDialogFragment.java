@@ -15,13 +15,7 @@ import com.application.apprem.R;
 import androidx.annotation.NonNull;
 import androidx.fragment.app.DialogFragment;
 
-/**
- * {@link DialogFragment} class to display a Network Error Dialog
- * when a Network Connectivity issue is encountered.
- * This Dialog provides a button that takes the user to the System's Network Settings page
- *
- * @author Kaushik N Sanji
- */
+
 public class NetworkErrorDialogFragment extends DialogFragment
         implements View.OnClickListener {
 
@@ -53,10 +47,6 @@ public class NetworkErrorDialogFragment extends DialogFragment
         //Inflating the Network Error Dialog Layout 'R.layout.network_error_dialog_original'
         //(Passing null as we are attaching the layout ourselves to a Dialog)
         View networkErrorLayoutView = LayoutInflater.from(getActivity()).inflate(R.layout.network_error_dialog, null);
-
-        //Retrieving the dialog's message to embed an icon in the text
-        TextView networkErrorMsgTextView = networkErrorLayoutView.findViewById(R.id.network_error_text_id);
-        //TextAppearanceUtility.replaceTextWithImage(getContext(), networkErrorMsgTextView);
 
         //Retrieving the action buttons
         Button positiveButton = networkErrorLayoutView.findViewById(R.id.network_error_settings_btn_id);

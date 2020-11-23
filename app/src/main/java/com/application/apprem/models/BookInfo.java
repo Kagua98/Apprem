@@ -16,8 +16,6 @@ import java.util.Locale;
 /**
  * Parcelable Model Class for holding the parsed data of the Books
  * retrieved in the search response
- *
- * @author Kaushik N Sanji
  */
 
 public class BookInfo implements Parcelable {

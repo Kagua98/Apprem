@@ -4,7 +4,7 @@ import android.app.SearchManager;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
-import android.graphics.Typeface;
+
 import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
@@ -18,16 +18,18 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.View.OnClickListener;
+import android.widget.FrameLayout;
 import android.widget.ImageButton;
 import android.widget.ProgressBar;
+import android.widget.RelativeLayout;
 import android.widget.ScrollView;
 import android.widget.TextView;
-import android.widget.Toast;
+//import android.widget.Toast;
 
 import com.application.apprem.R;
 import com.application.apprem.adapters.DisplayPagerAdapter;
-import com.application.apprem.adapterviews.KeywordFiltersDialogFragment;
-import com.application.apprem.adapterviews.RecyclerViewFragment;
+import com.application.apprem.fragments.KeywordFiltersDialogFragment;
+import com.application.apprem.fragments.RecyclerViewFragment;
 import com.application.apprem.cache.BitmapImageCache;
 import com.application.apprem.dialogs.NetworkErrorDialogFragment;
 import com.application.apprem.dialogs.PaginationNumberPickerDialogFragment;
@@ -39,6 +41,8 @@ import com.application.apprem.providers.RecentBookSearchProvider;
 import com.application.apprem.utils.PreferenceUtil;
 import com.application.apprem.utils.PreferencesObserverUtility;
 import com.application.apprem.workers.BooksLoader;
+import com.google.android.material.navigation.NavigationView;
+import com.google.android.material.snackbar.Snackbar;
 import com.google.android.material.tabs.TabLayout;
 
 import java.lang.ref.WeakReference;
@@ -54,20 +58,14 @@ import androidx.preference.PreferenceManager;
 import androidx.viewpager.widget.ViewPager;
 
 /**
- * The Main and the Searchable Activity of the app that shows the layout 'R.layout.activity_main_original'
- * containing a SearchView button and a ViewPager
- * which displays a list/grid of books based on the user's search
- *
- * @author Kaushik N Sanji
+ * Main Activity for the Library Part
+ * Inflates library_activity
+ * It contains the searchView and a ViewPager
  */
-public class BookSearchActivity
-        extends AppCompatActivity
-        implements KeywordFiltersDialogFragment.OnKeywordFilterSelectedListener,
-        TabLayout.OnTabSelectedListener,
-        LoaderManager.LoaderCallbacks<List<BookInfo>>,
-        OnAdapterItemDataSwapListener, OnPagerFragmentVerticalScrollListener,
-        SharedPreferences.OnSharedPreferenceChangeListener,
-        OnClickListener {
+public class BookSearchActivity extends AppCompatActivity
+        implements KeywordFiltersDialogFragment.OnKeywordFilterSelectedListener, TabLayout.OnTabSelectedListener,
+        LoaderManager.LoaderCallbacks<List<BookInfo>>, OnAdapterItemDataSwapListener, OnPagerFragmentVerticalScrollListener,
+        SharedPreferences.OnSharedPreferenceChangeListener, OnClickListener {
 
     //Constant used for logs
     private static final String LOG_TAG = BookSearchActivity.class.getSimpleName();
@@ -185,6 +183,7 @@ public class BookSearchActivity
         int noOfTabs = mTabLayout.getTabCount();
         for (int tabIndex = 0; tabIndex < noOfTabs; tabIndex++) {
             TabLayout.Tab tab = mTabLayout.getTabAt(tabIndex);
+            assert tab != null;
             tab.setCustomView(viewPagerAdapter.getTabView(tabIndex));
         }
 
@@ -204,20 +203,9 @@ public class BookSearchActivity
     }
 
     /**
-     * Method that manages the hidden No Result Page layout 'R.layout.no_result_page_original'
-     *
-     * @param doPrepare  Boolean to indicate whether the layout page is to be initialized or not
-     *                   <br/> When <b>TRUE</b>, the layout page will be initialized.
-     *                   #visibility value can be anything in this case as it will not be updated.
-     *                   <br/> When <b>FALSE</b>, the layout page will NOT be re-initialized,
-     *                   instead it allows to change the visibility of the layout page.
-     * @param visibility is one the Integer values of the View's Visibilities,
-     *                   to which the layout page's visibility is to be updated.
+     * Method that manages the hidden No Result Page layout
      */
     private void manageNoResultPage(boolean doPrepare, int visibility) {
-
-        //Retrieving the font to be used for the Text Content
-        Typeface contentTypeface = Typeface.createFromAsset(getAssets(), "fonts/lobster_two_regular.ttf");
 
         if (doPrepare) {
             //When the layout page is to be prepared
@@ -225,15 +213,6 @@ public class BookSearchActivity
             //Initializing the ScrollView having the content of No Result Page
             mNoResultPageScrollView = findViewById(R.id.no_result_page_id);
 
-            //Loading the font for the Title Text
-            TextView titleTextView = mNoResultPageScrollView.findViewById(R.id.no_result_content_title_text_id);
-          //  titleTextView.setTypeface(Typeface.createFromAsset(getAssets(), "fonts/ar_hermann_medium.ttf"));
-
-         //   //Loading the font for the remaining Text content
-         //   TextView content2TextView = mNoResultPageScrollView.findViewById(R.id.no_result_text_2_id);
-         //   content2TextView.setTypeface(contentTypeface);
-         //   TextView content3TextView = mNoResultPageScrollView.findViewById(R.id.no_result_text_3_id);
-         //   content3TextView.setTypeface(contentTypeface);
 
         } else {
             //When the layout page is to be shown/hidden
@@ -270,15 +249,7 @@ public class BookSearchActivity
     }
 
     /**
-     * Method that manages the hidden Welcome Page layout 'R.layout.welcome_page'
-     *
-     * @param doPrepare  Boolean to indicate whether the layout page is to be initialized or not
-     *                   <br/> When <b>TRUE</b>, the layout page will be initialized.
-     *                   #visibility value can be anything in this case as it will not be updated.
-     *                   <br/> When <b>FALSE</b>, the layout page will NOT be re-initialized,
-     *                   instead it allows to change the visibility of the layout page.
-     * @param visibility is one the Integer values of the View's Visibilities,
-     *                   to which the layout page's visibility is to be updated.
+     * Method that manages the hidden Welcome Page layout
      */
     private void manageWelcomePage(boolean doPrepare, int visibility) {
         if (doPrepare) {
@@ -310,10 +281,7 @@ public class BookSearchActivity
     }
 
     /**
-     * Method to toggle the visibility of the Indeterminate Progress Bar
-     *
-     * @param visibility is one the Integer values of the View's Visibilities,
-     *                   to which the ProgressBar's visibility is to be updated.
+     * Visibility of the Indeterminate Progress Bar
      */
     private void toggleProgressBarVisibility(int visibility) {
         mIndeterminateProgressBar.setVisibility(visibility);
@@ -400,6 +368,9 @@ public class BookSearchActivity
         //Registering the Preference Change Listener
         mPreferences.registerOnSharedPreferenceChangeListener(this);
 
+        //NavigationView navigationView = findViewById(R.id.nav_view);
+//
+        //navigationView.getMenu().getItem(6).setChecked(true);
     }
 
     //Called by the Activity when it loses focus
@@ -459,7 +430,11 @@ public class BookSearchActivity
             setTitle(getString(R.string.searched_book_title, mSearchQueryStr));
 
             //Performing the Book Search operation through a Loader
-            Toast.makeText(this, "Searching for " + mSearchQueryStr, Toast.LENGTH_SHORT).show();
+          //  Toast.makeText(this, "Searching for " + mSearchQueryStr, Toast.LENGTH_SHORT).show();
+
+            RelativeLayout parentView = findViewById(R.id.parentView);
+            Snackbar.make(parentView, "Searching for " + mSearchQueryStr, Snackbar.LENGTH_LONG)
+                    .show();
 
             //Displaying the Progress Bar
             toggleProgressBarVisibility(View.VISIBLE);
@@ -504,7 +479,7 @@ public class BookSearchActivity
         if (startIndex != 1) {
             //When the 'startIndex' setting value is not equal to 1
 
-            //Adding the key to exclusion, to avoid listener from retriggering the load on data change
+            //Adding the key to exclusion, to avoid listener from re-triggering the load on data change
             PreferencesObserverUtility.addKeyToExclude(mKeysToExclude, startIndexPrefKeyStr);
 
             //Opening the Editor to update the value
@@ -714,16 +689,6 @@ public class BookSearchActivity
         return true;
     }
 
-    /**
-     * This hook is called whenever an item in your options menu is selected.
-     * The default implementation simply returns false to have the normal
-     * processing happen.
-     *
-     * @param item The menu item that was selected.
-     * @return boolean Return false to allow normal menu processing to
-     * proceed, true to consume it here.
-     * @see #onCreateOptionsMenu
-     */
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         //Handling the Menu item selected
@@ -739,21 +704,19 @@ public class BookSearchActivity
             case R.id.clear_recent_search_action_id:
                 //Clearing the Recent suggestion history, when "Clear Search History" is clicked
                 mRecentSuggestions.clearHistory();
-                //Displaying a toast for the action done
-                Toast.makeText(this, R.string.search_suggestions_cleared_msg, Toast.LENGTH_SHORT).show();
+
+                RelativeLayout parentView = findViewById(R.id.parentView);
+                Snackbar.make(parentView, R.string.search_suggestions_cleared_msg, Snackbar.LENGTH_SHORT)
+                        .setBackgroundTint(getResources().getColor(android.R.color.holo_green_dark))
+                        .setAction("Okay", null)
+                        .show();
+
+
                 return true;
             case R.id.keyword_filter_action_id:
                 //When "Search Keyword Filters" is clicked
                 handleKeywordFilterAction();
                 return true;
-
-
-          //  case R.id.about_action_id:
-          //      //Starting the AboutActivity when "About" is clicked
-          //      Intent aboutIntent = new Intent(this, AboutActivity.class);
-          //      startActivity(aboutIntent);
-          //      return true;
-
 
             default:
                 return super.onOptionsItemSelected(item);
@@ -774,15 +737,17 @@ public class BookSearchActivity
         } else {
             //Displaying a Toast Message to indicate the proper usage
             //when the user is currently not searching but clicked the menu item "Search Keyword Filters"
-            Toast.makeText(this, getString(R.string.keyword_filter_search_usage_error), Toast.LENGTH_SHORT).show();
+
+            RelativeLayout parentView = findViewById(R.id.parentView);
+            Snackbar.make(parentView, getString(R.string.keyword_filter_search_usage_error), Snackbar.LENGTH_SHORT)
+                    .setAction("Okay", null)
+                    .show();
+
         }
     }
 
     /**
-     * Method that returns the current {@link RecyclerViewFragment}
-     * of the {@link ViewPager}
-     *
-     * @return current {@link RecyclerViewFragment} of the {@link ViewPager}
+     * Returns current {@link RecyclerViewFragment} of the ViewPager
      */
     private RecyclerViewFragment getCurrentFragmentFromViewPager() {
         DisplayPagerAdapter pagerAdapter = (DisplayPagerAdapter) mViewPager.getAdapter();
@@ -790,8 +755,7 @@ public class BookSearchActivity
     }
 
     /**
-     * Method that returns the {@link RecyclerViewFragment}
-     * of the {@link ViewPager} at the given position
+     * Returns the {@link RecyclerViewFragment} of the {@link ViewPager} at the given position
      *
      * @param position is the Position in the {@link ViewPager} whose Fragment is to be retrieved
      * @return {@link RecyclerViewFragment} at the position in the {@link ViewPager}
@@ -808,10 +772,6 @@ public class BookSearchActivity
      * @param position        is the item position to which the the RecyclerView needs to be positioned to
      * @param scrollImmediate is a boolean which denotes the way in which the scroll to position
      *                        needs to be handled
-     *                        <br/><b>TRUE</b> if the scroll to position needs to be set immediately
-     *                        without any animation
-     *                        <br/><b>FALSE</b> if the scroll to position needs to be done naturally
-     *                        with the default animation
      */
     private void scrollToItemPosition(int position, boolean scrollImmediate) {
         //Retrieving the current RecyclerViewFragment from the ViewPager
@@ -1034,8 +994,11 @@ public class BookSearchActivity
                                 //(Avoiding to display the toast multiple times when both 'startIndex'
                                 //setting is as same as the last viewed page index)
 
-                                //Displaying a message on restoring the last viewed page
-                                Toast.makeText(this, getString(R.string.restoring_page_msg, lastViewedPageIndex, startIndex), Toast.LENGTH_SHORT).show();
+                                //Notify User
+                                RelativeLayout parentView = findViewById(R.id.parentView);
+                                Snackbar.make(parentView, getString(R.string.restoring_page_msg, lastViewedPageIndex, startIndex), Snackbar.LENGTH_LONG)
+                                        .setAction("Okay", null)
+                                        .show();
                             }
 
                             Log.d(LOG_TAG, "onLoadFinished: Restoring page " + lastViewedPageIndex + " from " + startIndex);
@@ -1139,11 +1102,6 @@ public class BookSearchActivity
         }
     }
 
-    /**
-     * Called when a view has been clicked.
-     *
-     * @param view The view that was clicked.
-     */
     @Override
     public void onClick(View view) {
 
@@ -1164,8 +1122,12 @@ public class BookSearchActivity
                 //On Page First action, updating the 'Page to Display' setting to 1
                 prefEditor.putInt(startIndexPrefKeyStr, 1);
                 prefEditor.apply(); //applying the changes
-                //Displaying a Toast Message
-                Toast.makeText(this, getString(R.string.navigate_page_first_msg), Toast.LENGTH_SHORT).show();
+
+                RelativeLayout parentView = findViewById(R.id.parentView);
+                Snackbar.make(parentView, getString(R.string.navigate_page_first_msg), Snackbar.LENGTH_LONG)
+                        .setAction("Okay", null)
+                        .show();
+
                 break;
 
             case R.id.page_previous_button_id:
@@ -1174,8 +1136,12 @@ public class BookSearchActivity
                 startIndex = startIndex - 1;
                 prefEditor.putInt(startIndexPrefKeyStr, startIndex);
                 prefEditor.apply(); //applying the changes
-                //Displaying a Toast Message
-                Toast.makeText(this, getString(R.string.navigate_page_x_msg, startIndex), Toast.LENGTH_SHORT).show();
+
+                RelativeLayout relativeLayout = findViewById(R.id.parentView);
+                Snackbar.make(relativeLayout, getString(R.string.navigate_page_x_msg, startIndex), Snackbar.LENGTH_LONG)
+                        .setAction("Okay", null)
+                        .show();
+
                 break;
 
             case R.id.page_more_button_id:
@@ -1201,8 +1167,12 @@ public class BookSearchActivity
                 startIndex = startIndex + 1;
                 prefEditor.putInt(startIndexPrefKeyStr, startIndex);
                 prefEditor.apply(); //applying the changes
-                //Displaying a Toast Message
-                Toast.makeText(this, getString(R.string.navigate_page_x_msg, startIndex), Toast.LENGTH_SHORT).show();
+
+                RelativeLayout view2 = findViewById(R.id.parentView);
+                Snackbar.make(view2, getString(R.string.navigate_page_x_msg, startIndex), Snackbar.LENGTH_LONG)
+                        .setAction("Okay", null)
+                        .show();
+
                 break;
 
             case R.id.page_last_button_id:
@@ -1212,8 +1182,11 @@ public class BookSearchActivity
                         mPreferences.getInt(getString(R.string.pref_page_to_display_max_value_key),
                                 startIndex));
                 prefEditor.apply(); //applying the changes
-                //Displaying a Toast Message
-                Toast.makeText(this, getString(R.string.navigate_page_last_msg), Toast.LENGTH_SHORT).show();
+
+                RelativeLayout view1 = findViewById(R.id.parentView);
+                Snackbar.make(view1, getString(R.string.navigate_page_last_msg), Snackbar.LENGTH_LONG)
+                        .setAction("Okay", null)
+                        .show();
                 break;
 
         }
@@ -1221,7 +1194,7 @@ public class BookSearchActivity
     }
 
     /**
-     * Method that displays the Network Error Dialog
+     * Displays the Network Error Dialog
      */
     private void showNetworkErrorDialog() {
 

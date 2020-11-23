@@ -1,9 +1,6 @@
-package com.application.apprem.adapterviews;
+package com.application.apprem.fragments;
 
 import android.content.Intent;
-import android.graphics.Canvas;
-import android.graphics.Rect;
-import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -34,12 +31,8 @@ import androidx.recyclerview.widget.RecyclerView;
 import androidx.recyclerview.widget.StaggeredGridLayoutManager;
 
 /**
- * Fragment that inflates the layout 'R.layout.recycler_layout_view'
- * containing the {@link RecyclerView} used in {@link com.application.googlebooks.adapters.DisplayPagerAdapter}
- * for the ViewPager shown in {@link com.application.googlebooks.BookSearchActivity}
- * <p>
- * This Fragment manages both the List Item View and Grid Item View layouts
- *
+ * Inflates recycler_layout_view
+ * It manages both the List and Grid ItemView Layouts
  *
  */
 public class RecyclerViewFragment extends Fragment
@@ -77,13 +70,7 @@ public class RecyclerViewFragment extends Fragment
         return recyclerViewFragment;
     }
 
-    /**
-     * Method that registers the {@link OnPagerFragmentVerticalScrollListener} for the
-     * {@link com.application.googlebooks.BookSearchActivity} to receive
-     * RecyclerView scroll related events
-     *
-     * @param listener is the instance of the Activity implementing the {@link OnPagerFragmentVerticalScrollListener}
-     */
+
     public void setOnPagerFragmentVerticalScrollListener(OnPagerFragmentVerticalScrollListener listener) {
         mListener = listener;
     }
@@ -160,12 +147,6 @@ public class RecyclerViewFragment extends Fragment
         //Setting the Adapter on the RecyclerView
         mRecyclerView.setAdapter(recyclerGridAdapter);
 
-    //    //Setting the Book Shelf Item Decoration for Grid View
-    //    BookShelfItemDecoration bookShelfItemDecoration = new BookShelfItemDecoration(
-    //            ContextCompat.getDrawable(requireContext(), R.drawable.book_shelf_no_base),
-    //            getResources().getDimensionPixelSize(R.dimen.grid_item_bottom_decoration_offset)
-    //    );
-    //    mRecyclerView.addItemDecoration(bookShelfItemDecoration);
     }
 
     /**
@@ -183,20 +164,13 @@ public class RecyclerViewFragment extends Fragment
         ArrayList<BookInfo> bookInfoList = new ArrayList<>();
 
         //Initializing the Adapter for the List view
-        RecyclerListAdapter recyclerListAdapter = new RecyclerListAdapter(requireContext(), R.layout.books_list_item, bookInfoList);
+        RecyclerListAdapter recyclerListAdapter = new RecyclerListAdapter(requireContext(), R.layout.library_child3, bookInfoList);
 
         //Registering the OnAdapterItemClickListener on the Adapter
         recyclerListAdapter.setOnAdapterItemClickListener(this);
 
         //Setting the Adapter on the RecyclerView
         mRecyclerView.setAdapter(recyclerListAdapter);
-
-    //    //Setting the Book Shelf Item Decoration for List View
-    //    BookShelfItemDecoration bookShelfItemDecoration = new BookShelfItemDecoration(
-    //            ContextCompat.getDrawable(requireContext(), R.drawable.book_shelf_no_base),
-    //            getResources().getDimensionPixelSize(R.dimen.list_item_bottom_decoration_offset)
-    //    );
-    //    mRecyclerView.addItemDecoration(bookShelfItemDecoration);
 
     }
 
@@ -291,7 +265,7 @@ public class RecyclerViewFragment extends Fragment
     }
 
     /**
-     * Method exposed for the {@link com.application.googlebooks.BookSearchActivity}
+     * Method exposed for the {@link com.application.apprem.activities.BookSearchActivity}
      * to clear the {@link OnAdapterItemDataSwapListener} previously registered for the Fragment position specified
      *
      * @param position is the Fragment position on which this Listener is to be Unregistered
@@ -359,91 +333,6 @@ public class RecyclerViewFragment extends Fragment
     @Retention(RetentionPolicy.SOURCE)
     @IntDef({LIST_MODE, GRID_MODE})
     @interface LayoutMode {
-    }
-
-    /**
-     * Custom {@link android.support.v7.widget.RecyclerView.ItemDecoration} class
-     * for drawing the Book shelf image below the book image in the RecyclerView Item
-     */
-    private class BookShelfItemDecoration extends RecyclerView.ItemDecoration {
-
-        //Drawable resource of Book Shelf used as decoration
-        private Drawable mItemDrawable;
-        //Offset correction for the decoration
-        private int mOffsetFromImage;
-
-        /**
-         * Constructor of the {@link BookShelfItemDecoration}
-         *
-         * @param itemDrawable    is the Drawable to be used as Item Decoration
-         * @param offsetFromImage is the Offset correction for the Drawable used
-         */
-        BookShelfItemDecoration(Drawable itemDrawable, int offsetFromImage) {
-            mItemDrawable = itemDrawable;
-            mOffsetFromImage = offsetFromImage;
-        }
-
-        /**
-         * Retrieve any offsets for the given item. Each field of <code>outRect</code> specifies
-         * the number of pixels that the item view should be inset by, similar to padding or margin.
-         * The default implementation sets the bounds of outRect to 0 and returns.
-         *
-         * @param outRect Rect to receive the output.
-         * @param view    The child view to decorate
-         * @param parent  RecyclerView this ItemDecoration is decorating
-         * @param state   The current state of RecyclerView.
-         */
-        @Override
-        public void getItemOffsets(Rect outRect, View view, RecyclerView parent, RecyclerView.State state) {
-            super.getItemOffsets(outRect, view, parent, state);
-
-            int totalItems = parent.getAdapter().getItemCount();
-            if (parent.getChildAdapterPosition(view) == totalItems - 1) {
-                //Setting the Bottom offset height of the last Child view
-                //to be twice as that of the Drawable height without the offset correction
-                //(This correction is for the Pagination Buttons shown at the Bottom)
-                outRect.bottom = mItemDrawable.getIntrinsicHeight() * 2;
-
-            } else {
-                //Setting the Bottom offset height of the Child views (except the last) to the Drawable height
-                //(Applying the offset correction as it is applied on the Drawable decoration)
-                outRect.bottom = mItemDrawable.getIntrinsicHeight() - mOffsetFromImage;
-            }
-
-        }
-
-        /**
-         * Draw any appropriate decorations into the Canvas supplied to the RecyclerView.
-         * Any content drawn by this method will be drawn before the item views are drawn,
-         * and will thus appear underneath the views.
-         *
-         * @param canvas Canvas to draw into
-         * @param parent RecyclerView this ItemDecoration is drawing into
-         * @param state  The current state of RecyclerView
-         */
-        @Override
-        public void onDraw(Canvas canvas, RecyclerView parent, RecyclerView.State state) {
-            //Retrieving the Child View Count
-            int childCount = parent.getChildCount();
-
-            //Iterating over the Child views to define the drawable bounds and then draw on canvas
-            for (int index = 0; index < childCount; index++) {
-                //Retrieving the current Child View
-                View childView = parent.getChildAt(index);
-
-                //Defining the bounds for the Drawable decoration
-                int positionLeft = childView.getLeft();
-                int positionRight = childView.getRight();
-                //Applying the offset correction so that the Drawable decoration sits below the book image
-                int positionTop = childView.getBottom() - mOffsetFromImage;
-                int positionBottom = positionTop + mItemDrawable.getIntrinsicHeight();
-
-                //Applying the bounds on the Drawable decoration
-                mItemDrawable.setBounds(positionLeft, positionTop, positionRight, positionBottom);
-                //Drawing the decoration on the canvas
-                mItemDrawable.draw(canvas);
-            }
-        }
     }
 
     /**

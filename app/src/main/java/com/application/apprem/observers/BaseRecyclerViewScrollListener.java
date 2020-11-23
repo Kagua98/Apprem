@@ -9,8 +9,6 @@ import androidx.recyclerview.widget.StaggeredGridLayoutManager;
  * Abstract Class that extends the RecyclerView.OnScrollListener to inform
  * the subclass when the scroll has reached the last item view or scrolled away
  * from the last item view
- *
- * @author Kaushik N Sanji
  */
 public abstract class BaseRecyclerViewScrollListener extends RecyclerView.OnScrollListener {
 

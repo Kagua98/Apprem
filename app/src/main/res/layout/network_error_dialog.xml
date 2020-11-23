@@ -50,6 +50,9 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
+                android:textColor="@color/colorPrimary"
+                android:fontFamily="@font/rubik_bold"
+                android:backgroundTint="@android:color/white"
                 android:layout_gravity="center"
                 android:text="@string/network_error_cancel_button_text"/>
             <Space
@@ -59,6 +62,8 @@
                 android:text="@string/network_error_settings_button_text"
                 android:id="@+id/network_error_settings_btn_id"
                 android:layout_gravity="center"
+                android:fontFamily="@font/rubik_bold"
+                android:textColor="@android:color/white"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"/>

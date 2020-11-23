@@ -3,7 +3,7 @@ package com.application.apprem.activities;
 import android.os.Bundle;
 
 import com.application.apprem.R;
-import com.application.apprem.fragments.SettingsFragment;
+import com.application.apprem.settings.SettingsFragment;
 import com.application.apprem.utils.PreferenceUtil;
 
 import java.util.Objects;

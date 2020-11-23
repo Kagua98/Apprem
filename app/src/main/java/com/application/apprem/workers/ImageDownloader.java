@@ -11,8 +11,6 @@ import androidx.loader.content.AsyncTaskLoader;
 /**
  * {@link AsyncTaskLoader} for downloading the Bitmap Image from a given Image URL,
  * in a worker thread
- *
- * @author Kaushik N Sanji
  */
 public class ImageDownloader extends AsyncTaskLoader<Bitmap> {
 

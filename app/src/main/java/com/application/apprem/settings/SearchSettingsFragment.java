@@ -16,9 +16,8 @@ import androidx.preference.PreferenceFragmentCompat;
 import androidx.preference.PreferenceManager;
 
 /**
- * {@link Fragment} class that loads the Preferences for the "Search Settings" menu
+ * Fragment class that loads the Preferences for the "Search Settings" menu
  *
- * @author Kaushik N Sanji
  */
 public class SearchSettingsFragment extends PreferenceFragmentCompat
         implements Preference.OnPreferenceChangeListener {
@@ -33,7 +32,7 @@ public class SearchSettingsFragment extends PreferenceFragmentCompat
      * @param savedInstanceState If the fragment is being re-created from
      *                           a previous saved state, this is the state.
      * @param rootKey            If non-null, this preference fragment should be rooted at the
-     *                           {@link PreferenceScreen} with this key.
+     *                           PreferenceScreen with this key.
      */
     @Override
     public void onCreatePreferences(Bundle savedInstanceState, String rootKey) {

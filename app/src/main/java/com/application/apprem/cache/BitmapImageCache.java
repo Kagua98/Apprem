@@ -4,9 +4,7 @@ import android.graphics.Bitmap;
 import android.util.LruCache;
 
 /**
- * Application level class that saves the Bitmaps downloaded in a Memory Cache
- *
- *
+ * Saves the Bitmaps downloaded in a Memory Cache
  */
 public class BitmapImageCache {
 

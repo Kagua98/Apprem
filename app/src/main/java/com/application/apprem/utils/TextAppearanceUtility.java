@@ -15,8 +15,6 @@ import androidx.annotation.ColorInt;
 
 /**
  * Utility class for Text Appearance related modifications done using classes like {@link Spannable}
- *
- * @author Kaushik N Sanji
  */
 public class TextAppearanceUtility {
     //Constant used for logs

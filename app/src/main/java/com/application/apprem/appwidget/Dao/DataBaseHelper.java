@@ -47,13 +47,6 @@ class DataBaseHelper extends SQLiteOpenHelper {
     }
 
     private void upgradeFrom3To4(@NonNull SQLiteDatabase db) {
-//        db.execSQL("CREATE TEMPORARY TABLE widget_backup(_id INTEGER , appWidgetId INTEGER , currentTime INTEGER , backgroundColor INTEGER DEFAULT -1 , timeStyle INTEGER DEFAULT -1 , weekStyle INTEGER DEFAULT -1)");
-//        db.execSQL("INSERT INTO widget_backup SELECT _id , appWidgetId , currentTime , backgroundColor , timeStyle , weekStyle FROM app_widget");
-//        db.execSQL("DROP TABLE app_widget");
-//
-//        db.execSQL("CREATE TABLE app_widget(_id INTEGER PRIMARY KEY AUTOINCREMENT , appWidgetId INTEGER , currentTime INTEGER , backgroundColor INTEGER DEFAULT -1 , timeStyle INTEGER DEFAULT -1 , weekStyle INTEGER DEFAULT -1, profilePosition INTEGER DEFAULT 0, UNIQUE(appWidgetId))");
-//        db.execSQL("INSERT INTO app_widget (appWidgetId , currentTime , backgroundColor , timeStyle , weekStyle) SELECT appWidgetId , currentTime , backgroundColor , timeStyle , weekStyle FROM widget_backup");
-//        db.execSQL("DROP TABLE widget_backup");
         db.execSQL("ALTER TABLE app_widget ADD COLUMN profilePosition INTEGER DEFAULT 0;");
     }
 
@@ -62,7 +55,7 @@ class DataBaseHelper extends SQLiteOpenHelper {
     }
 
     private void upgradeFrom1To2(@NonNull SQLiteDatabase db) {
-        // table_1 表主键添加自增长
+
         db.execSQL("CREATE TEMPORARY TABLE table_1_backup(week INTEGER , section INTEGER , time INTEGER , startWeek INTEGER , endWeek INTEGER , doubleWeek INTEGER , course CHAR , classroom CHAR)");
         db.execSQL("INSERT INTO table_1_backup SELECT week , section , time , startWeek , endWeek , doubleWeek , course , classroom FROM table_1");
         db.execSQL("DROP TABLE table_1");
@@ -70,12 +63,12 @@ class DataBaseHelper extends SQLiteOpenHelper {
         db.execSQL("INSERT INTO table_1 (week , section , time , startWeek , endWeek , doubleWeek , course , classroom) SELECT week , section , time , startWeek , endWeek , doubleWeek , course , classroom FROM table_1_backup");
         db.execSQL("DROP TABLE table_1_backup");
 
-        // 创建 course_classroom 表
+        //Create the course_classroom table
         db.execSQL("CREATE TABLE course_classroom(_id INTEGER PRIMARY KEY AUTOINCREMENT , course CHAR , classroom CHAR)");
-        // 初始化 course_classroom 表数据
+        //Initialize course_classroom table data
         db.execSQL("INSERT OR IGNORE INTO course_classroom (course , classroom) SELECT course , classroom FROM table_1");
 
-        // 删除 table_2 表
+        //Delete table_2 table
         db.execSQL("DROP TABLE IF EXISTS table_2");
     }
 

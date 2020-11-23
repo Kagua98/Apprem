@@ -7,6 +7,7 @@ import android.os.Bundle;
 
 import com.application.apprem.R;
 
+
 public class Splash extends AppCompatActivity {
 
     @Override
@@ -17,7 +18,6 @@ public class Splash extends AppCompatActivity {
         Intent intent = new Intent(Splash.this, MainActivity.class);
         startActivity(intent);
         finish();
-
 
     }
 }

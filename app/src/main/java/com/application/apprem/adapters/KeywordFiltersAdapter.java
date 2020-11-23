@@ -9,7 +9,7 @@ import android.widget.TextView;
 
 
 import com.application.apprem.R;
-import com.application.apprem.adapterviews.KeywordFiltersDialogFragment;
+import com.application.apprem.fragments.KeywordFiltersDialogFragment;
 import com.application.apprem.models.KeywordFilter;
 
 import java.util.List;
@@ -20,10 +20,7 @@ import androidx.annotation.Nullable;
 
 /**
  * An {@link ArrayAdapter} class of {@link KeywordFilter} objects
- * used in {@link KeywordFiltersDialogFragment} AdapterView
- * class
- *
- * @author Kaushik N Sanji
+ * used in {@link KeywordFiltersDialogFragment}
  */
 public class KeywordFiltersAdapter extends ArrayAdapter<KeywordFilter> {
 

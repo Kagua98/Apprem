@@ -21,8 +21,6 @@ import androidx.loader.content.Loader;
  * <p>
  * <p>Images are downloaded only when not present in the {@link BitmapImageCache}</p>
  * <p>Images retrieved are updated to the corresponding ImageView reference passed</p>
- *
- * @author Kaushik N Sanji
  */
 public class ImageDownloaderFragment extends Fragment
         implements LoaderManager.LoaderCallbacks<Bitmap> {

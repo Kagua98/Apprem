@@ -12,14 +12,16 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical"
-        android:padding="16dp">
+        android:padding="10dp">
 
         <ImageView
             android:id="@+id/detail_book_image_id"
             android:layout_width="150dp"
             android:layout_height="200dp"
             android:scaleType="fitXY"
-            android:layout_gravity="center"/>
+            android:layout_marginTop="20dp"
+            android:layout_gravity="center"
+            android:contentDescription="@string/book_cover"/>
 
         <com.google.android.material.card.MaterialCardView
             android:id="@+id/detail_title_author_card_id"

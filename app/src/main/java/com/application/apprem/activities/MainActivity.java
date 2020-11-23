@@ -1,6 +1,7 @@
 package com.application.apprem.activities;
 
 import android.Manifest;
+import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
@@ -10,13 +11,13 @@ import android.os.Bundle;
 import android.os.Environment;
 import android.provider.Settings;
 import android.text.TextUtils;
+
 import android.view.MenuItem;
 import android.view.View;
 import android.view.Menu;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 
-import android.widget.LinearLayout;
 import android.widget.Spinner;
 import android.widget.TextView;
 
@@ -40,6 +41,7 @@ import com.google.android.material.navigation.NavigationView;
 import com.google.android.material.tabs.TabLayout;
 
 
+
 import java.io.File;
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -48,12 +50,12 @@ import java.util.List;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.ActionBarDrawerToggle;
 import androidx.browser.customtabs.CustomTabsIntent;
-import androidx.coordinatorlayout.widget.CoordinatorLayout;
+//import androidx.coordinatorlayout.widget.CoordinatorLayout;
 import androidx.core.content.ContextCompat;
 import androidx.core.view.GravityCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.appcompat.widget.Toolbar;
+
 import androidx.preference.PreferenceManager;
 import androidx.viewpager.widget.ViewPager;
 import info.isuru.sheriff.enums.SheriffPermission;
@@ -124,12 +126,33 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         PreferenceManager.setDefaultValues(this, R.xml.settings, false);
         MaterialToolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
+
         DrawerLayout drawer = findViewById(R.id.drawer_layout);
 
+
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
-                this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
+                this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close){
+            @Override
+            public void onDrawerSlide(View drawerView, float slideOffset) {
+                super.onDrawerSlide(drawerView, slideOffset);
+                float slideX = drawerView.getWidth() * slideOffset;
+
+                View view = findViewById(R.id.view);
+                view.setTranslationX(slideX);
+
+                float scaleFactor = 6f;
+                view.setScaleX(1 - (slideOffset / scaleFactor));
+                view.setScaleY(1 - (slideOffset / scaleFactor));
+
+
+            }
+        };
+        drawer.setScrimColor(getResources().getColor(android.R.color.transparent));
+        drawer.setDrawerElevation(10f);
         drawer.addDrawerListener(toggle);
         toggle.syncState();
+
+
 
         setupSevenDaysPref();
         setupFragments();
@@ -273,7 +296,9 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         DrawerLayout drawer = findViewById(R.id.drawer_layout);
         if (drawer.isDrawerOpen(GravityCompat.START)) {
             drawer.closeDrawer(GravityCompat.START);
+
         }
+
         ProfileManagement.resetSelectedProfile(this);
         finishAffinity();
     }
@@ -324,9 +349,9 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                 openUrlInChromeCustomTab(schoolWebsite);
             } else {
 
-                CoordinatorLayout parentView = findViewById(R.id.content_main_parent);
+                View view = findViewById(R.id.view);
 
-                Snackbar.make(parentView, getString(R.string.please_set_school_website_url), Snackbar.LENGTH_LONG)
+                Snackbar.make(view, getString(R.string.please_set_school_website_url), Snackbar.LENGTH_LONG)
                         .setBackgroundTint(getResources().getColor(android.R.color.holo_red_dark))
                         .setActionTextColor(getResources().getColor(R.color.white))
                         .setAction("Settings", new View.OnClickListener() {
@@ -338,11 +363,6 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                         })
                         .show();
 
-              //  ChocoBar.builder().setActivity(this)
-              //          .setText(getString(R.string.please_set_school_website_url))
-              //          .setDuration(ChocoBar.LENGTH_LONG)
-              //          .red()
-              //          .show();
             }
         } else if (itemId == R.id.teachers) {
             Intent teacher = new Intent(MainActivity.this, TeachersActivity.class);
@@ -354,6 +374,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             Intent intent = new Intent(MainActivity.this, BookSearchActivity.class);
             startActivity(intent);
         }
+
         DrawerLayout drawer = findViewById(R.id.drawer_layout);
         drawer.closeDrawer(GravityCompat.START);
         return true;
@@ -387,11 +408,10 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                     @Override
                     public void run() {
 
+                        View view = findViewById(R.id.view);
 
-                        CoordinatorLayout parentView = findViewById(R.id.content_main_parent);
-
-                        Snackbar.make(parentView, getString(R.string.backup_successful, getString(R.string.Documents)), Snackbar.LENGTH_LONG)
-                                .setBackgroundTint(getResources().getColor(android.R.color.holo_green_dark))
+                        Snackbar.make(view, getString(R.string.backup_successful, getString(R.string.Documents)), Snackbar.LENGTH_LONG)
+                               // .setBackgroundTint(getResources().getColor(android.R.color.holo_green_dark))
                                 .setActionTextColor(getResources().getColor(R.color.colorAccent))
                                 .setAction("View", new View.OnClickListener() {
                                     @Override
@@ -414,9 +434,15 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                     @Override
                     public void run() {
 
-                        CoordinatorLayout parentView = findViewById(R.id.content_main_parent);
-                        Snackbar.make(parentView, getString(R.string.backup_failed), Snackbar.LENGTH_LONG)
+                        View view = findViewById(R.id.view);
+                        Snackbar.make(view, getString(R.string.backup_failed), Snackbar.LENGTH_LONG)
                                 .setBackgroundTint(getResources().getColor(android.R.color.holo_red_dark))
+                                .setAction("Retry", new View.OnClickListener() {
+                                    @Override
+                                    public void onClick(View view) {
+                                        backup();
+                                    }
+                                })
                                 .show();
                     }
                 });
@@ -437,14 +463,16 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         File file = new File(path);
         if (!file.exists()) {
 
-            CoordinatorLayout parentView = findViewById(R.id.content_main_parent);
+            View view = findViewById(R.id.view);
 
-            Snackbar.make(parentView, getString(R.string.no_backup_found_in_downloads, getString(R.string.Documents)), Snackbar.LENGTH_LONG)
+            Snackbar.make(view, getString(R.string.no_backup_found_in_downloads, getString(R.string.Documents)), Snackbar.LENGTH_LONG)
                     .setBackgroundTint(getResources().getColor(android.R.color.holo_red_dark))
                     .show();
 
             return;
         }
+
+        ProgressDialog progressDialog = new ProgressDialog(MainActivity.this);
 
         final AppCompatActivity activity = this;
         DbHelper dbHelper = new DbHelper(this);
@@ -455,6 +483,8 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             @Override
             public void onStart() {
 
+                progressDialog.setMessage("Loading");
+                progressDialog.show();
             }
 
             @Override
@@ -462,11 +492,12 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                 runOnUiThread(new Runnable() {
                     @Override
                     public void run() {
+                        progressDialog.dismiss();
 
-                        CoordinatorLayout parentView = findViewById(R.id.content_main_parent);
+                        View view = findViewById(R.id.view);
 
-                        Snackbar.make(parentView, getString(R.string.import_successful), Snackbar.LENGTH_LONG)
-                                .setBackgroundTint(getResources().getColor(android.R.color.holo_green_dark))
+                        Snackbar.make(view, getString(R.string.import_successful), Snackbar.LENGTH_LONG)
+                                //.setBackgroundTint(getResources().getColor(android.R.color.holo_green_dark))
                                 .show();
 
                     }
@@ -480,9 +511,9 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                     @Override
                     public void run() {
 
-                        CoordinatorLayout parentView = findViewById(R.id.content_main_parent);
+                        View view = findViewById(R.id.view);
 
-                        Snackbar.make(parentView, getString(R.string.import_failed), Snackbar.LENGTH_LONG)
+                        Snackbar.make(view, getString(R.string.import_failed), Snackbar.LENGTH_LONG)
                                 .setBackgroundTint(getResources().getColor(android.R.color.holo_red_dark))
                                 .show();
                     }
@@ -503,19 +534,20 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                             DbHelper dbHelper = new DbHelper(MainActivity.this);
                             dbHelper.deleteAll();
 
-                            CoordinatorLayout parentView = findViewById(R.id.content_main_parent);
+                            View view = findViewById(R.id.view);
 
-                            Snackbar.make(parentView, getString(R.string.successfully_deleted_everything), Snackbar.LENGTH_LONG)
-                                    .setBackgroundTint(getResources().getColor(android.R.color.holo_green_dark))
+                            Snackbar.make(view, getString(R.string.successfully_deleted_everything), Snackbar.LENGTH_LONG)
+                                  //  .setBackgroundTint(getResources().getColor(android.R.color.holo_green_dark))
                                     .show();
 
 
                             MainActivity.this.initAll();
                         } catch (Exception e) {
 
-                            CoordinatorLayout parentView = findViewById(R.id.content_main_parent);
 
-                            Snackbar.make(parentView, getString(R.string.an_error_occurred), Snackbar.LENGTH_LONG)
+                            View view = findViewById(R.id.view);
+
+                            Snackbar.make(view, getString(R.string.an_error_occurred), Snackbar.LENGTH_LONG)
                                     .setBackgroundTint(getResources().getColor(android.R.color.holo_red_dark))
                                     .show();
 

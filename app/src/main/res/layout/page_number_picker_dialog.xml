@@ -41,6 +41,8 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
+                    android:textColor="@color/colorPrimary"
+                    android:backgroundTint="@android:color/white"
                     android:layout_margin="5dp"
                     android:text="@string/page_number_picker_cancel_button_text"/>
                 <Button
@@ -48,6 +50,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
+                    android:textColor="@android:color/white"
                     android:layout_margin="5dp"
                     android:text="@string/page_number_picker_set_button_text"/>
             </LinearLayout>

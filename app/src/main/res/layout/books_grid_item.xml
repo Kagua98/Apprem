@@ -24,8 +24,8 @@
                 tools:text="Grief is the Thing with Feathers"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:id="@+id/grid_item_title_text_id"
-                android:textAppearance="@style/TextAppearance.MaterialComponents.Headline5"/>
+                android:maxLines="3"
+                android:id="@+id/grid_item_title_text_id" />
             <LinearLayout
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"

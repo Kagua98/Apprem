@@ -12,8 +12,6 @@ import androidx.preference.DialogPreference;
 
 /**
  * Custom {@link DialogPreference} class for {@link android.widget.NumberPicker}
- *
- * @author Kaushik N Sanji
  */
 public class NumberPickerPreference extends DialogPreference {
 

@@ -32,14 +32,7 @@ import androidx.loader.content.Loader;
 import androidx.recyclerview.widget.DiffUtil;
 import androidx.recyclerview.widget.RecyclerView;
 
-/**
- * Adapter Class of the RecyclerView whose layout 'R.layout.books_grid_item_original' is inflated by
- * {@link com.application.googlebooks.adapterviews.RecyclerViewFragment}
- * that is used along with the {@link android.support.v7.widget.StaggeredGridLayoutManager}
- * to bind and display a Grid of {@link BookInfo} objects
- *
- * @author Kaushik N Sanji
- */
+
 public class RecyclerGridAdapter extends RecyclerView.Adapter<RecyclerGridAdapter.ViewHolder>
         implements LoaderManager.LoaderCallbacks<DiffUtil.DiffResult> {
 
@@ -80,8 +73,7 @@ public class RecyclerGridAdapter extends RecyclerView.Adapter<RecyclerGridAdapte
         mLayoutRes = resource;
         mBookInfoList = bookInfos;
 
-        //Saving an instance of the font face for the Book Title
-        mTitleTextTypeface = Typeface.createFromAsset(getContext().getAssets(), "fonts/garamond_bold.ttf");
+
     }
 
     /**
@@ -103,13 +95,7 @@ public class RecyclerGridAdapter extends RecyclerView.Adapter<RecyclerGridAdapte
         mItemClickListener = listener;
     }
 
-    /**
-     * Method that registers the {@link OnAdapterItemDataSwapListener} for the
-     * {@link com.application.googlebooks.BookSearchActivity}
-     * to receive event callbacks
-     *
-     * @param listener is the instance of the Activity implementing the {@link OnAdapterItemDataSwapListener}
-     */
+
     public void setOnAdapterItemDataSwapListener(OnAdapterItemDataSwapListener listener) {
         mItemDataSwapListener = listener;
     }

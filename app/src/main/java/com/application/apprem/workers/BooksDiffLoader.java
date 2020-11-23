@@ -14,8 +14,6 @@ import androidx.recyclerview.widget.DiffUtil;
  * {@link AsyncTaskLoader} class that performs the difference computation between two sets
  * of {@link BookInfo} objects in the worker thread and returns the result to the
  * RecyclerView's Adapter to reload the data accordingly
- *
- * @author Kaushik N Sanji
  */
 public class BooksDiffLoader extends AsyncTaskLoader<DiffUtil.DiffResult> {
 

@@ -11,7 +11,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.application.apprem.R;
-import com.application.apprem.adapterviews.RecyclerViewFragment;
+import com.application.apprem.fragments.RecyclerViewFragment;
 
 import java.util.Set;
 
@@ -23,8 +23,6 @@ import androidx.fragment.app.FragmentStatePagerAdapter;
 
 /**
  * Provides the appropriate Fragment for the ViewPager
- *
- * @author Kaushik N Sanji
  */
 public class DisplayPagerAdapter extends FragmentStatePagerAdapter {
 

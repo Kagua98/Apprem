@@ -1,48 +1,44 @@
 package com.application.apprem.activities;
 
-import android.animation.Animator;
-import android.animation.AnimatorInflater;
+
 import android.content.Intent;
-import android.graphics.Typeface;
 import android.net.Uri;
-import android.os.Build;
 import android.os.Bundle;
 import android.os.Parcelable;
-import android.text.Layout;
 import android.text.TextUtils;
 import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
-import android.view.ViewGroup;
-import android.view.ViewTreeObserver;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.RatingBar;
 import android.widget.TextView;
-import android.widget.Toast;
+
 
 import com.application.apprem.R;
+import com.application.apprem.fragments.RecyclerViewFragment;
 import com.application.apprem.models.BookInfo;
 import com.application.apprem.utils.PreferenceUtil;
 import com.application.apprem.utils.TextAppearanceUtility;
 import com.application.apprem.workers.ImageDownloaderFragment;
+import com.google.android.material.snackbar.Snackbar;
 
 import java.text.ParseException;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.browser.customtabs.CustomTabsIntent;
 import androidx.core.app.NavUtils;
-import androidx.core.content.ContextCompat;
 import androidx.core.widget.NestedScrollView;
+import saschpe.android.customtabs.CustomTabsHelper;
+import saschpe.android.customtabs.WebViewFallback;
 
 /**
- * Activity class that displays the {@link BookInfo} Item data selected in the List/Grid View.
- * The Item data is received via an Intent and the corresponding view components in the
- * layout 'R.layout.activity_book_detail_original' are updated accordingly
- *
- * @author Kaushik N Sanji
+ * Shows Details of the Book selected in the List/GridView
+ * Inflates library_book_detail
  */
+
 public class BookDetailActivity extends AppCompatActivity
-        implements View.OnClickListener, ViewTreeObserver.OnGlobalLayoutListener {
+        implements View.OnClickListener {
 
     //Bundle Key used for grabbing the Intent's data
     public static final String BOOK_INFO_ITEM_STR_KEY = "BookInfo.Item.Data";
@@ -70,19 +66,6 @@ public class BookDetailActivity extends AppCompatActivity
     private TextView mSamplePreviewsSubtitleTextView;
     private TextView mNotForSaleTextView;
 
-    //Storing references to the Image Borders that are to be hidden based on the data
-   // private ImageView mPublisherBorderImageView;
-    //private ImageView mCategoryBorderImageView;
-    private ImageView mSamplesBorderImageView;
-    //private ImageView mInfoBorderImageView;
-
-    //Storing references to the ImageViews for TextView Expand/Collapse
-   // private ImageView mTitleTextExpandImageView;
-   // private ImageView mAuthorTextExpandImageView;
-
-    //Storing references to the NestedScrollViews that wraps the Title/Author TextViews
- //   private NestedScrollView mTitleTextScrollView;
- //   private NestedScrollView mAuthorTextScrollView;
 
     //Storing the Links pointed to by the respective buttons, retrieved from the BookInfo data
     private String mEpubLink;
@@ -90,13 +73,6 @@ public class BookDetailActivity extends AppCompatActivity
     private String mPreviewLink;
     private String mInfoLink;
     private String mBuyLink;
-
-    //ViewTreeObserver to watch the Title TextView and Author TextView to enable Expand/Collapse
-    private ViewTreeObserver mViewTreeObserver;
-
-    //Rotate Animators for TextView Expand/Collapse Image anchor
-    private Animator rotateTo180Anim;
-    private Animator rotateTo0Anim;
 
     //Intent for the Larger Book Image to be shown in the Book Image Activity
     private Intent mBookImageIntent;
@@ -115,10 +91,8 @@ public class BookDetailActivity extends AppCompatActivity
 
         //Retrieving the View Components: START
         mTitleTextView = findViewById(R.id.detail_title_text_id);
- //       mTitleTextScrollView = findViewById(R.id.detail_title_text_scroll_id);
 
         mAuthorTextView = findViewById(R.id.detail_author_text_id);
-  //      mAuthorTextScrollView = findViewById(R.id.detail_author_text_scroll_id);
 
         mBookRatingBar = findViewById(R.id.detail_ratingbar_id);
         mRatingCountTextView = findViewById(R.id.detail_rating_count_text_id);
@@ -142,13 +116,6 @@ public class BookDetailActivity extends AppCompatActivity
         mNotForSaleTextView = findViewById(R.id.detail_not_for_sale_text_id);
         //Retrieving the View Components: END
 
-        //Retrieving the Parent View's TreeObserver for the Title TextView and the Author TextView
-        mViewTreeObserver = findViewById(R.id.detail_title_author_card_id).getViewTreeObserver();
-
-
-        //Loading the Rotation Animators for TextView Expand/Collapse Image anchors
-        rotateTo0Anim = AnimatorInflater.loadAnimator(this, R.animator.rotate_180_0);
-        rotateTo180Anim = AnimatorInflater.loadAnimator(this, R.animator.rotate_0_180);
 
         //Setting the Click Listeners on the Buttons
         mEpubImageButton.setOnClickListener(this);
@@ -165,11 +132,8 @@ public class BookDetailActivity extends AppCompatActivity
     }
 
     /**
-     * Method that handles the Intent data being passed by the
-     * {@link com.application.apprem.adapterviews.RecyclerViewFragment}
-     *
-     * @param intent is the Intent that contains the Item Data of the Item clicked in the
-     *               {@link com.application.apprem.adapterviews.RecyclerViewFragment}
+     * Handles the Intent data being passed by the
+     * {@link RecyclerViewFragment}
      */
     private void handleIntent(Intent intent) {
         //Retrieving the Item Data passed in the intent
@@ -183,10 +147,7 @@ public class BookDetailActivity extends AppCompatActivity
     }
 
     /**
-     * Updates the layout elements with the data found in the {@link BookInfo} object
-     *
-     * @param itemBookInfo is the {@link BookInfo} object for the Item view clicked in the
-     *                     {@link com.application.apprem.adapterviews.RecyclerViewFragment}
+     * Updates the layout
      */
     private void updateLayout(BookInfo itemBookInfo) {
         //Updating the Title Text
@@ -223,8 +184,7 @@ public class BookDetailActivity extends AppCompatActivity
     }
 
     /**
-     * Method that updates the Saleability information of the Book based on the details
-     * retrieved from the Item's {@link BookInfo} Object
+     * Details about the saleability of the book
      *
      * @param isForSale    is a Boolean which tells whether the Book is for Sale or Not in the user's region
      * @param isDiscounted is a Boolean which tells whether the Book is Discounted or not
@@ -244,7 +204,7 @@ public class BookDetailActivity extends AppCompatActivity
 
             //Setting the Text on the Button
             if (isDiscounted) {
-                //When the Book is having a Discount, make the List Price appear with a Strikethrough Text
+                //When the Book is having a Discount, make the List Price appear with a Strike-through Text
                 //on the Button
                 String textToSet = listPrice + " " + retailPrice + " Buy";
                 TextAppearanceUtility.setStrikethroughText(mBuyButton, textToSet, listPrice);
@@ -258,19 +218,14 @@ public class BookDetailActivity extends AppCompatActivity
 
         } else {
             //Hiding the Buy Button and displaying only the 'Not For Sale' Text as the Book is NOT
-            //saleable in the user's region
+            //for sale in the user's region
             mBuyButton.setVisibility(View.GONE);
             mNotForSaleTextView.setVisibility(View.VISIBLE);
         }
     }
 
     /**
-     * Method that updates the Previews section with the links retrieved from the Item's {@link BookInfo} Object
-     *
-     * @param isSampleAvailable is a Boolean which tells whether the Sample Previews are available or not
-     * @param epubLink          is the Epub Sample Preview Link if available; else empty
-     * @param pdfLink           is the Pdf Sample Preview Link if available; else empty
-     * @param previewLink       is the Web Preview Link if available; else an Info link
+     * Method that updates the Previews section
      */
     private void updatePreviews(boolean isSampleAvailable, String epubLink, String pdfLink, String previewLink) {
         if (isSampleAvailable) {
@@ -295,29 +250,6 @@ public class BookDetailActivity extends AppCompatActivity
             //Updating the Web Preview Button with its Preview Link
             mPreviewLink = previewLink;
 
-      /*      if (!TextUtils.isEmpty(epubLink) && !TextUtils.isEmpty(pdfLink)) {
-                //Changing the placement of Web Preview Button when Epub + Pdf Previews are available
-
-                //Moving the Web Preview Button to the bottom of the two buttons
-                ConstraintLayout.LayoutParams layoutParamsWeb = (ConstraintLayout.LayoutParams) mWebPreviewButton.getLayoutParams();
-                layoutParamsWeb.topToBottom = mPdfImageButton.getId();
-                layoutParamsWeb.leftToLeft = R.id.detail_book_info_card_content_id;
-                layoutParamsWeb.startToStart = R.id.detail_book_info_card_content_id;
-                layoutParamsWeb.rightToRight = R.id.detail_book_info_card_content_id;
-                layoutParamsWeb.endToEnd = R.id.detail_book_info_card_content_id;
-                layoutParamsWeb.leftToRight = -1;
-                layoutParamsWeb.startToEnd = -1;
-                layoutParamsWeb.topMargin = getResources().getDimensionPixelSize(R.dimen.detail_content_margin_top);
-                layoutParamsWeb.leftMargin = 0;
-                layoutParamsWeb.rightMargin = 0;
-
-                //Changing the constraints of the Pdf Button, to be attached to the right of the parent
-                ConstraintLayout.LayoutParams layoutParamsPdf = (ConstraintLayout.LayoutParams) mPdfImageButton.getLayoutParams();
-                layoutParamsPdf.rightToRight = R.id.detail_book_info_card_content_id;
-                layoutParamsPdf.endToEnd = R.id.detail_book_info_card_content_id;
-                layoutParamsPdf.rightToLeft = -1;
-                layoutParamsPdf.endToStart = -1;
-            }   */
 
             //Hiding the Info Button and its related components as Web Preview is available
             mInfoButton.setVisibility(View.GONE);
@@ -333,7 +265,6 @@ public class BookDetailActivity extends AppCompatActivity
             mEpubImageButton.setVisibility(View.GONE);
             mPdfImageButton.setVisibility(View.GONE);
             mWebPreviewButton.setVisibility(View.GONE);
-           // mSamplesBorderImageView.setVisibility(View.GONE);
             mSamplePreviewsSubtitleTextView.setVisibility(View.GONE);
 
         }
@@ -341,20 +272,14 @@ public class BookDetailActivity extends AppCompatActivity
 
     /**
      * Method that updates the Description Text for the Book
-     *
-     * @param description is the Description of the Book retrieved from the Item's {@link BookInfo} Object
      */
     private void updateDescription(String description) {
         //Setting the Description of the Book
         mDescriptionTextView.setText(description);
-        //Setting the Font for the Description
-        mDescriptionTextView.setTypeface(Typeface.createFromAsset(getAssets(), "fonts/quintessential_regular.ttf"));
     }
 
     /**
      * Method that updates the Category Text
-     *
-     * @param categories is the Book Categories retrieved from the Item's {@link BookInfo} Object
      */
     private void updateCategory(String categories) {
         if (categories.equals(getString(R.string.no_categories_found_default_text))) {
@@ -370,9 +295,6 @@ public class BookDetailActivity extends AppCompatActivity
 
     /**
      * Method that updates the Publisher Text and its Published Date
-     *
-     * @param publisher        is the Publisher retrieved from the Item's {@link BookInfo} Object
-     * @param publishedDateStr is the Book's Published Date retrieved from the Item's {@link BookInfo} Object
      */
     private void updatePublisher(String publisher, String publishedDateStr) {
         if (publisher.equals(getString(R.string.no_publisher_found_default_text))
@@ -389,11 +311,7 @@ public class BookDetailActivity extends AppCompatActivity
     }
 
     /**
-     * Method that updates the Number of Pages in the Book along with its Type,
-     * using the information retrieved from the Item's {@link BookInfo} Object
-     *
-     * @param pageCount is the Number of Pages in the Book
-     * @param bookType  is the Type that tells if it is a Magazine or a Book
+     * Method that updates the Number of Pages in the Book along with its Type
      */
     private void updatePagesInfo(int pageCount, String bookType) {
         //Setting the Pages information
@@ -402,9 +320,6 @@ public class BookDetailActivity extends AppCompatActivity
 
     /**
      * Method that updates the Book Image
-     *
-     * @param imageLinkForDetailInfo is the Link to the Book's Image
-     *                               retrieved from the Item's {@link BookInfo} Object
      */
     private void updateBookImage(String imageLinkForDetailInfo) {
         if (!TextUtils.isEmpty(imageLinkForDetailInfo)) {
@@ -421,11 +336,7 @@ public class BookDetailActivity extends AppCompatActivity
     }
 
     /**
-     * Method that generates an Intent for the Larger Book Image to be shown
-     * when the Book ImageView is clicked
-     *
-     * @param imageLinkForBookImageInfo is the Link to the Book's Image
-     *                                  retrieved from the Item's {@link BookInfo} Object
+     * Show Book Cover in full screen
      */
     private void generateBookImageIntent(String imageLinkForBookImageInfo) {
         if (!TextUtils.isEmpty(imageLinkForBookImageInfo)) {
@@ -447,8 +358,8 @@ public class BookDetailActivity extends AppCompatActivity
     /**
      * Method that updates the Book's Rating fields
      *
-     * @param bookRatings     is the Book's Star Rating retrieved from the Item's {@link BookInfo} Object
-     * @param bookRatingCount is the Count of Ratings on the Book, retrieved from the Item's {@link BookInfo} Object
+     * @param bookRatings     is the Book's Star Rating
+     * @param bookRatingCount is the Count of Ratings on the Book
      */
     private void updateBookRating(float bookRatings, String bookRatingCount) {
         //Updating the Rating on the RatingBar
@@ -459,21 +370,14 @@ public class BookDetailActivity extends AppCompatActivity
 
     /**
      * Method that updates the Author Text
-     *
-     * @param authors is the Authors String retrieved from the Item's {@link BookInfo} Object
      */
     private void updateAuthor(String authors) {
         //Setting the Author Text
         mAuthorTextView.setText(getString(R.string.by_author_text, authors));
-        //Setting the Font for the Author
-        mAuthorTextView.setTypeface(Typeface.createFromAsset(getAssets(), "fonts/quintessential_regular.ttf"));
     }
 
     /**
      * Method that updates the Title Text
-     *
-     * @param title    is the Book Title retrieved from the Item's {@link BookInfo} Object
-     * @param subTitle is the Book SubTitle retrieved from the Item's {@link BookInfo} Object
      */
     private void updateTitle(String title, String subTitle) {
         if (!TextUtils.isEmpty(subTitle)) {
@@ -496,52 +400,22 @@ public class BookDetailActivity extends AppCompatActivity
             mTitleTextView.setText(title);
         }
 
-        //Setting the Font for the Title
-        mTitleTextView.setTypeface(Typeface.createFromAsset(getAssets(), "fonts/coprgtb.ttf"));
     }
 
-    /**
-     * Method that opens a webpage for the URL passed
-     *
-     * @param urlString is the String containing the URL of the webpage to be launched
-     */
-    private void openLink(String urlString) {
-        //Parsing the URL
-        Uri webPageUri = Uri.parse(urlString);
-        //Creating an ACTION_VIEW Intent with the URI
-        Intent webIntent = new Intent(Intent.ACTION_VIEW, webPageUri);
-        //Checking if there is an Activity that accepts the Intent
-        if (webIntent.resolveActivity(getPackageManager()) != null) {
-            //Launching the corresponding Activity and passing it the Intent
-            startActivity(webIntent);
-        }
-    }
 
-    /**
-     * This hook is called whenever an item in the options menu is selected.
-     *
-     * @param item The menu item that was selected.
-     * @return boolean Return false to allow normal menu processing to
-     * proceed, true to consume it here.
-     */
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         //Executing based on MenuItem's Id
-        switch (item.getItemId()) {
-            case android.R.id.home:
-                //Handling the action bar's home/up button
-                NavUtils.navigateUpFromSameTask(this);
-                return true;
-            default:
-                return super.onOptionsItemSelected(item);
+        if (item.getItemId() == android.R.id.home) {
+            //Handling the action bar's home/up button
+            NavUtils.navigateUpFromSameTask(this);
+            return true;
         }
+        return super.onOptionsItemSelected(item);
     }
 
     /**
-     * Called when a view has been clicked.
-     * Mainly used for the Buttons in this Details Page
-     *
-     * @param view The view that was clicked.
+     * Mainly used for Buttons in the Details Page
      */
     @Override
     public void onClick(View view) {
@@ -549,23 +423,116 @@ public class BookDetailActivity extends AppCompatActivity
         switch (view.getId()) {
             case R.id.detail_epub_button_id:
                 //For the EPUB Preview Button
-                openLink(mEpubLink);
+               // openLink(mEpubLink);
+
+                try {
+                    CustomTabsIntent customTabsIntent = new CustomTabsIntent.Builder()
+                            .addDefaultShareMenuItem()
+                            .setToolbarColor(PreferenceUtil.getPrimaryColor(this))
+                            .setShowTitle(true)
+                            .build();
+
+                    CustomTabsHelper.Companion.addKeepAliveExtra(BookDetailActivity.this, customTabsIntent.intent);
+
+
+                    CustomTabsHelper.Companion.openCustomTab(BookDetailActivity.this, customTabsIntent,
+                            Uri.parse(mEpubLink),
+                            new WebViewFallback());
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+
                 break;
             case R.id.detail_pdf_button_id:
                 //For the PDF Preview Button
-                openLink(mPdfLink);
+                //openLink(mPdfLink);
+
+
+                try {
+                    CustomTabsIntent customTabsIntent = new CustomTabsIntent.Builder()
+                            .addDefaultShareMenuItem()
+                            .setToolbarColor(PreferenceUtil.getPrimaryColor(this))
+                            .setShowTitle(true)
+                            .build();
+
+                    CustomTabsHelper.Companion.addKeepAliveExtra(BookDetailActivity.this, customTabsIntent.intent);
+
+
+                    CustomTabsHelper.Companion.openCustomTab(BookDetailActivity.this, customTabsIntent,
+                            Uri.parse(mPdfLink),
+                            new WebViewFallback());
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+
                 break;
             case R.id.detail_web_button_id:
                 //For the WEB Preview Button
-                openLink(mPreviewLink);
+               // openLink(mPreviewLink);
+
+                try {
+                    CustomTabsIntent customTabsIntent = new CustomTabsIntent.Builder()
+                            .addDefaultShareMenuItem()
+                            .setToolbarColor(PreferenceUtil.getPrimaryColor(this))
+                            .setShowTitle(true)
+                            .build();
+
+                    CustomTabsHelper.Companion.addKeepAliveExtra(BookDetailActivity.this, customTabsIntent.intent);
+
+
+                    CustomTabsHelper.Companion.openCustomTab(BookDetailActivity.this, customTabsIntent,
+                            Uri.parse(mPreviewLink),
+                            new WebViewFallback());
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+
+
                 break;
             case R.id.detail_info_button_id:
                 //For the Info Button
-                openLink(mInfoLink);
+                //openLink(mInfoLink);
+
+                try {
+                    CustomTabsIntent customTabsIntent = new CustomTabsIntent.Builder()
+                            .addDefaultShareMenuItem()
+                            .setToolbarColor(PreferenceUtil.getPrimaryColor(this))
+                            .setShowTitle(true)
+                            .build();
+
+                    CustomTabsHelper.Companion.addKeepAliveExtra(BookDetailActivity.this, customTabsIntent.intent);
+
+
+                    CustomTabsHelper.Companion.openCustomTab(BookDetailActivity.this, customTabsIntent,
+                            Uri.parse(mInfoLink),
+                            new WebViewFallback());
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+
+
                 break;
             case R.id.detail_buy_button_id:
                 //For the Buy Button
-                openLink(mBuyLink);
+              //  openLink(mBuyLink);
+
+                try {
+                    CustomTabsIntent customTabsIntent = new CustomTabsIntent.Builder()
+                            .addDefaultShareMenuItem()
+                            .setToolbarColor(PreferenceUtil.getPrimaryColor(this))
+                            .setShowTitle(true)
+                            .build();
+
+                    CustomTabsHelper.Companion.addKeepAliveExtra(BookDetailActivity.this, customTabsIntent.intent);
+
+
+                    CustomTabsHelper.Companion.openCustomTab(BookDetailActivity.this, customTabsIntent,
+                            Uri.parse(mBuyLink),
+                            new WebViewFallback());
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+
                 break;
             case R.id.detail_book_image_id:
                 //For the Book Image shown
@@ -577,164 +544,24 @@ public class BookDetailActivity extends AppCompatActivity
                 } else {
                     //When the Image is not present for the Book
                     //Displaying a toast to indicate the user that there is no image for the Book
-                    Toast.makeText(this, R.string.no_book_image_msg, Toast.LENGTH_SHORT).show();
+                   // Toast.makeText(this, R.string.no_book_image_msg, Toast.LENGTH_SHORT).show();
+
+                    NestedScrollView scrollView = findViewById(R.id.scrollView);
+                    Snackbar.make(scrollView, R.string.no_book_image_msg, Snackbar.LENGTH_LONG)
+                            .setAction("Okay", null)
+                            .show();
+
                 }
                 break;
 
         }
     }
 
-    /**
-     * Callback method to be invoked when the global layout state or the visibility of views
-     * within the view tree changes.
-     * This is applied for the View that contains both the Title Text and the Author Text
-     */
-    @Override
-    public void onGlobalLayout() {
-        //Enabling the Title TextView for Expansion if it exceeds Maxlines
-        addExpandableStateForEllipsizedTextViews(mTitleTextView);
-        //Enabling the Author TextView for Expansion if it exceeds Maxlines
-        addExpandableStateForEllipsizedTextViews(mAuthorTextView);
-
-        //Retrieving the Parent View's TreeObserver
-        mViewTreeObserver = findViewById(R.id.detail_title_author_card_id).getViewTreeObserver();
-
-        if (mViewTreeObserver.isAlive()) {
-            //UnRegistering the OnGlobalLayoutListener when done
-            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN) {
-                mViewTreeObserver.removeOnGlobalLayoutListener(this);
-            } else {
-                mViewTreeObserver.removeGlobalOnLayoutListener(this);
-            }
-        }
-    }
-
-    /**
-     * Method that adds click listeners to TextViews with Text exceeding
-     * the MaxLines setting, which enables them to be expanded on click
-     *
-     * @param textView is the TextView of either the Title Text or the Author Text which
-     *                 is to be enabled for expansion
-     */
-    private void addExpandableStateForEllipsizedTextViews(TextView textView) {
-        //Retrieving the total number of Text Lines in the TexView
-        int totalLineCount = textView.getLineCount();
-
-        if (totalLineCount > 0) {
-            //When Layout is attached to the TextView and the line count is more than 0
-
-            //Retrieving the Ellipse count for the entire Text
-            int totalEllipseCount = getEllipseCountFromTextView(textView, totalLineCount);
-
-       /*     if (totalEllipseCount > 0) {
-                //When the Text in the TextView is Ellipsized (exceeds MaxLines set),
-                //enable the Click Listener
-                switch (textView.getId()) {
-                    case R.id.detail_title_text_id:
-                        //For the Title TextView
-                        if (mTitleTextExpandImageView.getVisibility() == View.GONE) {
-                            //Displaying the expand image anchor for the lengthy Title Text
-                            mTitleTextExpandImageView.setVisibility(View.VISIBLE);
-
-                            //Registering the click listener on the Title TextView
-                            mTitleTextView.setOnClickListener(this);
-                        }
-                        break;
-                    case R.id.detail_author_text_id:
-                        if (mAuthorTextExpandImageView.getVisibility() == View.GONE) {
-                            //Displaying the expand image anchor for the lengthy Author Text
-                            mAuthorTextExpandImageView.setVisibility(View.VISIBLE);
-
-                            //Registering the click listener on the Author TextView
-                            mAuthorTextView.setOnClickListener(this);
-                        }
-                        break;
-                }
-            }   */
-        }
-    }
-
-    /**
-     * Method that searches for the Ellipsis in the Text of a TextView and returns its total count
-     *
-     * @param textView       is the TextView containing a Text which needs to be scanned for Ellipsis
-     * @param totalLineCount is the Total Line count of the Text in Integer
-     * @return Integer containing the total number of Ellipsis found in the Text of a TextView
-     */
-    private int getEllipseCountFromTextView(TextView textView, int totalLineCount) {
-        int totalEllipseCount = 0; //Defaulting the Total Ellipse count to 0, initially
-
-        //Retrieving the layout attached to TextView
-        Layout textViewLayout = textView.getLayout();
-
-        //Iterating over the Lines of the Text and counting the Ellipsis found
-        for (int index = 0; index < totalLineCount; index++) {
-            if (textViewLayout.getEllipsisCount(index) > 0) {
-                totalEllipseCount++;
-            }
-        }
-
-        //Returning the total Ellipsis found
-        return totalEllipseCount;
-    }
-
-    /**
-     * Method that toggles the TextView Expand/Collapse
-     * for the Title Text(R.id.detail_title_text_id) and the Author Text (R.id.detail_author_text_id)
-     *
-     * @param textView                  is the TextView of either the Title Text or the Author Text
-     * @param originalLineCount         is the Original MaxLine Count set for the TextViews
-     * @param textExpandAnchorImageView is the Expand/Collapse ImageView anchor for the TextView passed
-     * @param textScrollView            is the {@link NestedScrollView} which is the parent of the TextView passed
-     */
-    private void toggleTextViewExpansion(TextView textView, int originalLineCount, ImageView textExpandAnchorImageView, NestedScrollView textScrollView) {
-        //Retrieving the Current Line count of the Text in the TextView
-        int totalLineCount = textView.getLineCount();
-
-        //Retrieving the Ellipse count for the entire Text
-        int totalEllipseCount = getEllipseCountFromTextView(textView, totalLineCount);
-
-        //Retrieving the basic Layout Params of the NestedScrollView
-        ViewGroup.LayoutParams layoutParams = textScrollView.getLayoutParams();
-
-        if (totalEllipseCount == 0) {
-            //Resetting to original state when it was previously expanded to show all the lines
-            textView.setMaxLines(originalLineCount);
-
-            //Resetting the parent NestedScrollView height to WRAP_CONTENT
-            layoutParams.height = ViewGroup.LayoutParams.WRAP_CONTENT;
-
-            //Rotating the Image Anchor from 180 to 0
-            rotateTo0Anim.setTarget(textExpandAnchorImageView);
-            rotateTo0Anim.start();
-
-        } else {
-            //Setting to the expanded state to show all the lines
-            textView.setMaxLines(Integer.MAX_VALUE);
-
-            //Retrieving the Max Height set for the parent NestedScrollView
-            int scrollContentMaxHeight = getResources().getDimensionPixelSize(R.dimen.detail_title_author_content_max_height);
-
-            //Limiting the Height of the parent NestedScrollView when the content Height is more than the fixed Height
-            if (textView.getMeasuredHeight() > scrollContentMaxHeight) {
-                layoutParams.height = scrollContentMaxHeight; //Limiting to the fixed Height set
-            }
-
-            //Rotating the Image Anchor from 0 to 180
-            rotateTo180Anim.setTarget(textExpandAnchorImageView);
-            rotateTo180Anim.start();
-        }
-    }
 
     //Called by the Activity when it is prepared to be shown
     @Override
     protected void onResume() {
         super.onResume();
-
-        if (mViewTreeObserver != null && mViewTreeObserver.isAlive()) {
-            //Registering the OnGlobalLayoutListener when the ViewTreeObserver is alive
-            mViewTreeObserver.addOnGlobalLayoutListener(this);
-        }
 
     }
 

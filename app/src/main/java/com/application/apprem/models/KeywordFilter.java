@@ -3,8 +3,6 @@ package com.application.apprem.models;
 /**
  * Model Class for holding the data of the different Search Keyword Filters
  * available for the Google's Book API
- *
- * @author Kaushik N Sanji
  */
 public class KeywordFilter {
 

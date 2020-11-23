@@ -8,8 +8,6 @@ import androidx.preference.PreferenceDialogFragmentCompat;
 /**
  * {@link PreferenceDialogFragmentCompat} class that manages and displays the Confirmation Dialog
  * shown for the custom {@link ConfirmationPreference} class
- *
- * @author Kaushik N Sanji
  */
 public class ConfirmationPreferenceDialogFragmentCompat extends PreferenceDialogFragmentCompat {
 

@@ -12,8 +12,7 @@ import androidx.preference.PreferenceDialogFragmentCompat;
 /**
  * {@link PreferenceDialogFragmentCompat} class that displays and manages the NumberPicker dialog
  * shown for the custom {@link NumberPickerPreference} class
- *
- * @author Kaushik N Sanji
+
  */
 public class NumberPickerPreferenceDialogFragmentCompat extends PreferenceDialogFragmentCompat {
 

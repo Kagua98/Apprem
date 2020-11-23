@@ -20,8 +20,6 @@ import java.util.List;
 /**
  * Utility Class that manages the REST Calls with the Google's BOOK API
  * and parses the response
- *
- * @author Kaushik N Sanji
  */
 public class BookClientUtility {
 

@@ -7,12 +7,15 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.MenuItem;
 import android.widget.EditText;
+
 import android.widget.Toast;
+
 
 import com.application.apprem.R;
 import com.application.apprem.models.Note;
 import com.application.apprem.utils.DbHelper;
 import com.application.apprem.utils.PreferenceUtil;
+
 
 import java.util.Objects;
 
@@ -44,7 +47,11 @@ public class NoteEditorActivity extends AppCompatActivity {
     public void onBackPressed() {
         Objects.requireNonNull(note).setText(text.getText().toString());
         db.updateNote(note);
+
+
         Toast.makeText(NoteEditorActivity.this, getResources().getString(R.string.saved), Toast.LENGTH_SHORT).show();
+
+
         super.onBackPressed();
     }
 
@@ -54,7 +61,11 @@ public class NoteEditorActivity extends AppCompatActivity {
             case android.R.id.home:
                 Objects.requireNonNull(note).setText(text.getText().toString());
                 db.updateNote(note);
-                Toast.makeText(NoteEditorActivity.this, getResources().getString(R.string.saved), Toast.LENGTH_SHORT).show();
+
+                Toast.makeText(NoteEditorActivity.this, getResources().getString(R.string.saved), Toast.LENGTH_SHORT)
+                        .show();
+
+
                 super.onBackPressed();
                 return true;
             default:

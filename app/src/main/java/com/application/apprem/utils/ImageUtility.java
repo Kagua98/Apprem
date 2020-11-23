@@ -19,8 +19,7 @@ import java.net.URL;
 /**
  * Utility Class that manages tasks which deals with Images
  * like downloading Image from a given URL
- *
- * @author Kaushik N Sanji
+
  */
 public class ImageUtility {
 

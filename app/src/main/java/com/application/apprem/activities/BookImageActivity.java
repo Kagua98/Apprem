@@ -15,18 +15,15 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.NavUtils;
 
 /**
- * Activity class that displays the Image of the {@link com.application.apprem.models.BookInfo}
- * Book item being viewed in the {@link BookDetailActivity}
+ * Shows Image from the BookDetailActivity
  *
  */
 public class BookImageActivity extends AppCompatActivity {
 
     //Bundle Key used for grabbing the Intent's data
     public static final String BOOK_INFO_ITEM_IMAGE_STR_KEY = "BookInfo.Item.Image.Data";
-    //Constant used for Logs
-    private static final String LOG_TAG = BookImageActivity.class.getSimpleName();
 
-    //Method invoked by the system to create and setup the layout 'R.layout.activity_book_image'
+
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         setTheme(PreferenceUtil.getGeneralTheme(this));
@@ -59,24 +56,14 @@ public class BookImageActivity extends AppCompatActivity {
 
     }
 
-    /**
-     * This hook is called whenever an item in your options menu is selected.
-     *
-     * @param item The menu item that was selected.
-     * @return boolean Return false to allow normal menu processing to
-     * proceed, true to consume it here.
-     */
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         //Executing based on MenuItem's Id
-        switch (item.getItemId()) {
-            case android.R.id.home:
-                //Handling the action bar's home/up button
-                NavUtils.navigateUpFromSameTask(this);
-                return true;
-            default:
-                return super.onOptionsItemSelected(item);
+        if (item.getItemId() == android.R.id.home) {//Handling the action bar's home/up button
+            NavUtils.navigateUpFromSameTask(this);
+            return true;
         }
+        return super.onOptionsItemSelected(item);
     }
 
 }

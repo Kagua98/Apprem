@@ -1,4 +1,4 @@
-package com.application.apprem.fragments;
+package com.application.apprem.settings;
 
 import android.app.DatePickerDialog;
 import android.app.TimePickerDialog;

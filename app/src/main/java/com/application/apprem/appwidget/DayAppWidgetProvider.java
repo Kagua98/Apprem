@@ -28,10 +28,10 @@ import androidx.annotation.NonNull;
 
 public class DayAppWidgetProvider extends AppWidgetProvider {
 
-    private static final String ACTION_RESTORE = "com.ulan.timetable" + ".ACTION_RESTORE";
-    private static final String ACTION_YESTERDAY = "com.ulan.timetable" + ".ACTION_YESTERDAY";
-    private static final String ACTION_TOMORROW = "com.ulan.timetable" + ".ACTION_TOMORROW";
-    private static final String ACTION_NEW_DAY = "com.ulan.timetable" + ".ACTION_NEW_DAY";
+    private static final String ACTION_RESTORE = "com.application.apprem" + ".ACTION_RESTORE";
+    private static final String ACTION_YESTERDAY = "com.application.apprem" + ".ACTION_YESTERDAY";
+    private static final String ACTION_TOMORROW = "com.application.apprem" + ".ACTION_TOMORROW";
+    private static final String ACTION_NEW_DAY = "com.application.apprem" + ".ACTION_NEW_DAY";
 
     private static final int ONE_DAY_MILLIS = 86400000;
 

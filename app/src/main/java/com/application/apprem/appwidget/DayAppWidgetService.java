@@ -76,7 +76,6 @@ class DayAppWidgetRemoteViewsFactory implements RemoteViewsService.RemoteViewsFa
         RemoteViews rv = new RemoteViews(mContext.getPackageName(), R.layout.item_day_appwidget);
         Week week = content.get(position);
 
-//        String lessons = getLessons(content, mContext);
         if (week != null) {
             String time;
             if (PreferenceUtil.showTimes(mContext))

@@ -12,8 +12,6 @@ import java.util.List;
  * Utility Class that manages the Preference Keys to exclude
  * from or include in the Preference Listener and also in the
  * preparation of the Search URL
- *
- * @author Kaushik N Sanji
  */
 public class PreferencesObserverUtility {
 
@@ -59,7 +57,7 @@ public class PreferencesObserverUtility {
      */
     public static void removeKeyToInclude(List<String> keysToExclude, String key) {
         //Checking initially if the Key is not empty and the list does contain the Key
-        if (!TextUtils.isEmpty(key) && keysToExclude.contains(key)) {
+        if (!TextUtils.isEmpty(key)) {
             //Removing from the exclusion list
             keysToExclude.remove(key);
         }
